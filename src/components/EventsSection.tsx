@@ -6,25 +6,25 @@ const EventsSection = () => {
     date: 'June 21, 2025',
     description: 'Join us for a special yoga session celebrating International Yoga Day with students, teachers, and parents.',
     tags: ['#YogaDay', '#Wellness'],
-    image: 'https://images.unsplash.com/photo-1501854140801-50d01698950b?w=400&h=250&fit=crop'
+    image: 'https://fortuneworldschool.com/uploads/gallery/category/17301843644.jpg'
   }, {
     title: 'Investiture Ceremony',
     date: 'May 16, 2025',
     description: 'Annual ceremony to invest the new student council with leadership responsibilities and honor badges.',
     tags: ['#Leadership', '#Ceremony'],
-    image: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=400&h=250&fit=crop'
+    image: 'https://fortuneworldschool.com/uploads/gallery/image/17474674488.jpeg'
   }, {
     title: 'Mother\'s Day Celebration',
     date: 'May 9, 2025',
     description: 'Special celebration honoring mothers with cultural performances and appreciation activities.',
     tags: ['#MothersDay', '#Cultural'],
-    image: 'https://images.unsplash.com/photo-1581090464777-f3220bbe1b8b?w=400&h=250&fit=crop'
+    image: 'https://fortuneworldschool.com/uploads/gallery/category/17467922167.jpeg'
   }, {
     title: 'Annual Day 2024',
     date: 'December 14, 2024',
     description: 'Grand Annual Day celebration featuring cultural performances, awards ceremony, and student achievements.',
     tags: ['#AnnualDay', '#Cultural'],
-    image: 'https://fortuneworldschool.com/images/annual'
+    image: 'https://fortuneworldschool.com/uploads/gallery/image/17345948165.JPG'
   }];
   return <section id="events" className="py-20 bg-gray-50">
       <div className="container mx-auto px-4">
