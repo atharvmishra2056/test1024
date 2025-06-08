@@ -56,9 +56,9 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
-				'school-blue': 'hsl(var(--school-blue))',
-				'school-yellow': 'hsl(var(--school-yellow))',
 				'school-red': 'hsl(var(--school-red))',
+				'school-beige': 'hsl(var(--school-beige))',
+				'school-white': 'hsl(var(--school-white))',
 			},
 			borderRadius: {
 				lg: 'var(--radius)',

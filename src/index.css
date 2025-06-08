@@ -16,16 +16,16 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 210 100% 31%;  /* Royal Blue #005A9C */
+    --primary: 357 64% 47%;  /* Red #C5302A */
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 51 100% 50%;  /* Sunrise Yellow #FFD700 */
+    --secondary: 50 66% 80%;  /* Beige #ECE3B1 */
     --secondary-foreground: 222.2 47.4% 11.2%;
 
-    --muted: 210 40% 96.1%;
+    --muted: 50 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
 
-    --accent: 51 100% 50%;
+    --accent: 50 66% 80%;
     --accent-foreground: 222.2 47.4% 11.2%;
 
     --destructive: 0 84.2% 60.2%;
@@ -33,14 +33,14 @@
 
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 210 100% 31%;
+    --ring: 357 64% 47%;
 
     --radius: 0.75rem;
 
     /* Custom school colors */
-    --school-blue: 210 100% 31%;
-    --school-yellow: 51 100% 50%;
-    --school-red: 0 84.2% 60.2%;
+    --school-red: 357 64% 47%;
+    --school-beige: 50 66% 80%;
+    --school-white: 0 0% 100%;
   }
 
   .dark {
@@ -82,27 +82,31 @@
 
 @layer components {
   .school-gradient {
-    background: linear-gradient(135deg, hsl(var(--school-blue)) 0%, hsl(var(--school-yellow)) 100%);
+    background: linear-gradient(135deg, hsl(var(--school-red)) 0%, hsl(var(--school-beige)) 100%);
   }
   
-  .text-school-blue {
-    color: hsl(var(--school-blue));
+  .text-school-red {
+    color: hsl(var(--school-red));
   }
   
-  .text-school-yellow {
-    color: hsl(var(--school-yellow));
-  }
-  
-  .bg-school-blue {
-    background-color: hsl(var(--school-blue));
-  }
-  
-  .bg-school-yellow {
-    background-color: hsl(var(--school-yellow));
+  .text-school-beige {
+    color: hsl(var(--school-beige));
   }
   
   .bg-school-red {
     background-color: hsl(var(--school-red));
+  }
+  
+  .bg-school-beige {
+    background-color: hsl(var(--school-beige));
+  }
+  
+  .bg-school-white {
+    background-color: hsl(var(--school-white));
+  }
+
+  .beige-gradient {
+    background: linear-gradient(135deg, hsl(var(--school-beige)) 0%, rgba(236, 227, 177, 0.3) 100%);
   }
 }
 
@@ -122,6 +126,12 @@
   
   .hover-lift:hover {
     transform: translateY(-8px);
-    box-shadow: 0 20px 40px rgba(0, 90, 156, 0.15);
+    box-shadow: 0 20px 40px rgba(197, 48, 42, 0.15);
+  }
+
+  .glass-effect {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
   }
 }

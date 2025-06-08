@@ -18,6 +18,7 @@ const Navigation = () => {
     { name: 'Home', href: '#home' },
     { name: 'About', href: '#about' },
     { name: 'Academics', href: '#academics' },
+    { name: 'Principal\'s Message', href: '/principal-message' },
     { name: 'Admissions', href: '#admissions' },
     { name: 'Facilities', href: '#facilities' },
     { name: 'Activities', href: '#activities' },
@@ -32,22 +33,22 @@ const Navigation = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center space-x-4">
-            <div className="w-12 h-12 bg-school-blue rounded-full flex items-center justify-center">
+            <div className="w-12 h-12 bg-school-red rounded-full flex items-center justify-center">
               <span className="text-white font-bold text-xl">FW</span>
             </div>
             <div>
-              <h1 className="text-xl font-bold text-school-blue">Fortune World School</h1>
+              <h1 className="text-xl font-bold text-school-red">Fortune World School</h1>
               <p className="text-sm text-muted-foreground">Excellence in Education</p>
             </div>
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-8">
+          <div className="hidden lg:flex space-x-6">
             {navItems.map((item) => (
               <a
                 key={item.name}
                 href={item.href}
-                className="text-foreground hover:text-school-blue transition-colors duration-300 font-medium"
+                className="text-foreground hover:text-school-red transition-colors duration-300 font-medium text-sm"
               >
                 {item.name}
               </a>
@@ -56,7 +57,7 @@ const Navigation = () => {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
+            className="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
             onClick={() => setIsOpen(!isOpen)}
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
@@ -65,12 +66,12 @@ const Navigation = () => {
 
         {/* Mobile Navigation */}
         {isOpen && (
-          <div className="md:hidden py-4 bg-white border-t">
+          <div className="lg:hidden py-4 bg-white border-t">
             {navItems.map((item) => (
               <a
                 key={item.name}
                 href={item.href}
-                className="block py-2 px-4 text-foreground hover:text-school-blue hover:bg-gray-50 transition-colors duration-300"
+                className="block py-2 px-4 text-foreground hover:text-school-red hover:bg-gray-50 transition-colors duration-300"
                 onClick={() => setIsOpen(false)}
               >
                 {item.name}

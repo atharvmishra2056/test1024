@@ -22,11 +22,11 @@ const CoactivitiesSection = () => {
   ];
 
   return (
-    <section id="activities" className="py-20 bg-white">
+    <section id="activities" className="py-20 bg-gradient-to-br from-white to-school-beige/20">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-school-blue mb-4">Co-curricular & Sports</h2>
-          <div className="w-24 h-1 bg-school-yellow mx-auto mb-6"></div>
+          <h2 className="text-4xl md:text-5xl font-bold text-school-red mb-4">Co-curricular & Sports</h2>
+          <div className="w-24 h-1 bg-school-red mx-auto mb-6"></div>
           <p className="text-xl text-gray-700 max-w-3xl mx-auto">
             Sports, arts, community service and character-building activities are available on campus to develop well-rounded personalities.
           </p>
@@ -37,7 +37,7 @@ const CoactivitiesSection = () => {
           {activities.map((activity, index) => (
             <div
               key={index}
-              className={`${activity.color} rounded-2xl p-6 text-center hover-lift cursor-pointer group`}
+              className={`${activity.color} rounded-2xl p-6 text-center hover-lift cursor-pointer group shadow-lg`}
             >
               <div className="text-4xl mb-3 group-hover:scale-110 transition-transform duration-300">
                 {activity.icon}
@@ -48,16 +48,16 @@ const CoactivitiesSection = () => {
         </div>
 
         {/* Achievements */}
-        <div className="bg-gray-50 rounded-2xl p-8">
-          <h3 className="text-2xl font-bold text-school-blue mb-8 text-center">Our Achievements</h3>
+        <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-xl">
+          <h3 className="text-2xl font-bold text-school-red mb-8 text-center">Our Achievements</h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {achievements.map((achievement, index) => (
-              <div key={index} className="bg-white rounded-xl p-6 text-center hover-lift">
-                <div className="w-16 h-16 bg-school-yellow rounded-full flex items-center justify-center mx-auto mb-4">
+              <div key={index} className="beige-gradient rounded-xl p-6 text-center hover-lift shadow-lg">
+                <div className="w-16 h-16 bg-school-red rounded-full flex items-center justify-center mx-auto mb-4">
                   <span className="text-2xl">🏆</span>
                 </div>
-                <h4 className="font-bold text-school-blue mb-2">{achievement.title}</h4>
-                <p className="text-school-yellow font-semibold">{achievement.award}</p>
+                <h4 className="font-bold text-school-red mb-2">{achievement.title}</h4>
+                <p className="text-school-red font-semibold">{achievement.award}</p>
                 <p className="text-gray-500 text-sm">{achievement.year}</p>
               </div>
             ))}
