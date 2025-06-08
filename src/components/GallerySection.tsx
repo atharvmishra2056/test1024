@@ -15,7 +15,7 @@ const GallerySection = () => {
     { category: 'Field Trips', image: 'https://media.fortuneindia.com/fortune-india/import/2024-10-09/mia8jwsk/University.jpg?w=640&auto=format,compress&fit=max&q=70', caption: 'Educational Visit' },
     { category: 'Sports Day', image: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=400&h=300&fit=crop', caption: 'Athletic Competition' },
     { category: 'Campus Life', image: 'https://fortuneworldschool.com/assets/web/images/3.jpg' },
-    { category: 'Annual Day', image: 'https://instagram.fdel11-1.fna.fbcdn.net/v/t51.29350-15/470947349_1041833734366788_389782865768401047_n.jpg?stp=dst-jpg_e15_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0uaW1hZ2VfdXJsZ2VuLjcyMHg0MDUuc2RyLmYyOTM1MC5kZWZhdWx0X2ltYWdlIn0&_nc_ht=instagram.fdel11-1.fna.fbcdn.net&_nc_cat=100&_nc_oc=Q6cZ2QF13SCmzvhsfcL1haJoMts5aTyN15UjDoITmRBlm54VkLNZ_vL0kXW3d1KbzOJVdJE7QTBcLqGcTfUxMqClpo6U&_nc_ohc=3hKew4aklpEQ7kNvwGTISdk&_nc_gid=UpEHwzBMYweg8FWH0OpQ3w&edm=APs17CUBAAAA&ccb=7-5&ig_cache_key=MzUyNzAwMTI0NzE3NTE5MTY3MQ%3D%3D.3-ccb7-5&oh=00_AfPjir5rBvvae1OnqcSuIVF9Do0QyU7A1-vV4qXJ5dPoRw&oe=684B31A6&_nc_sid=10d13b', caption: 'Award Ceremony' },
+    { category: 'Annual Day', image: 'https://i.ibb.co/QFX1Bvsk/487150596-1067804302035931-58532030792832080-n.jpg', caption: 'Award Ceremony' },
     { category: 'Sports Day', image: 'https://sanfortworldschool.com/wp-content/uploads/2024/02/IMG_4470-1024x683.jpg', caption: 'Victory Celebration' },
   ];
 
