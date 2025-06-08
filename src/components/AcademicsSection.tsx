@@ -58,7 +58,7 @@ const AcademicsSection = () => {
         <div className="text-center bg-slate-100">
           <h3 className="text-2xl font-bold text-school-blue mb-6">Download Resources</h3>
           <div className="flex flex-wrap justify-center gap-4 mx-[240px] px-[10px] py-0 my-0 bg-slate-700 rounded-none">
-            {['Syllabus', 'Exam Pattern', 'CBSE Guidelines', 'Academic Calendar'].map((item, index) => <button key={index} className="flex items-center px-6 py-3 bg-school-blue text-white rounded-lg hover:bg-blue-700 transform hover:scale-105 transition-all duration-300">
+            {['Syllabus', 'Exam Pattern', 'CBSE Guidelines', 'Academic Calendar'].map((item, index) => <button key={index} className="flex items-center px-6 py-3 bg-school-blue text-white rounded-lg hover:bg-blue-700 transform hover:scale-105 transition-all duration-300 mx-px text-base">
                 <Download size={20} className="mr-2" />
                 {item}
               </button>)}
