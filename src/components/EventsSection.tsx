@@ -5,25 +5,32 @@ import { Calendar, Download, Tag } from 'lucide-react';
 const EventsSection = () => {
   const events = [
     {
-      title: 'Annual Day Celebration 2024',
-      date: 'December 15, 2024',
-      description: 'Join us for our grand Annual Day celebration featuring cultural performances, awards ceremony, and much more.',
-      tags: ['#AnnualDay', '#Cultural'],
+      title: 'International Yoga Day',
+      date: 'June 21, 2025',
+      description: 'Join us for a special yoga session celebrating International Yoga Day with students, teachers, and parents.',
+      tags: ['#YogaDay', '#Wellness'],
       image: 'https://images.unsplash.com/photo-1501854140801-50d01698950b?w=400&h=250&fit=crop',
     },
     {
-      title: 'Parent-Teacher Meeting',
-      date: 'January 20, 2025',
-      description: 'Important PTM session to discuss student progress and upcoming academic activities.',
-      tags: ['#PTM', '#Academic'],
+      title: 'Investiture Ceremony',
+      date: 'May 16, 2025',
+      description: 'Annual ceremony to invest the new student council with leadership responsibilities and honor badges.',
+      tags: ['#Leadership', '#Ceremony'],
       image: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=400&h=250&fit=crop',
     },
     {
-      title: 'Science Olympiad Registration',
-      date: 'February 1, 2025',
-      description: 'Registration open for National Science Olympiad. Showcase your scientific knowledge and win exciting prizes.',
-      tags: ['#Olympiad', '#Science'],
+      title: 'Mother\'s Day Celebration',
+      date: 'May 9, 2025',
+      description: 'Special celebration honoring mothers with cultural performances and appreciation activities.',
+      tags: ['#MothersDay', '#Cultural'],
       image: 'https://images.unsplash.com/photo-1581090464777-f3220bbe1b8b?w=400&h=250&fit=crop',
+    },
+    {
+      title: 'Annual Day 2024',
+      date: 'December 14, 2024',
+      description: 'Grand Annual Day celebration featuring cultural performances, awards ceremony, and student achievements.',
+      tags: ['#AnnualDay', '#Cultural'],
+      image: 'https://fortuneworldschool.com/images/annual',
     },
   ];
 
@@ -75,10 +82,15 @@ const EventsSection = () => {
 
         {/* Download Academic Calendar */}
         <div className="text-center">
-          <button className="inline-flex items-center px-8 py-4 bg-school-blue text-white rounded-full font-semibold hover:bg-blue-700 transform hover:scale-105 transition-all duration-300 shadow-xl">
+          <a 
+            href="https://fortuneworldschool.com/assets/web/images/calendar.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center px-8 py-4 bg-school-blue text-white rounded-full font-semibold hover:bg-blue-700 transform hover:scale-105 transition-all duration-300 shadow-xl"
+          >
             <Download className="mr-2" size={20} />
             Download Academic Calendar
-          </button>
+          </a>
         </div>
       </div>
     </section>

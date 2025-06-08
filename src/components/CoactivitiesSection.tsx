@@ -28,7 +28,7 @@ const CoactivitiesSection = () => {
           <h2 className="text-4xl md:text-5xl font-bold text-school-blue mb-4">Co-curricular & Sports</h2>
           <div className="w-24 h-1 bg-school-yellow mx-auto mb-6"></div>
           <p className="text-xl text-gray-700 max-w-3xl mx-auto">
-            Beyond academics, we nurture talents in arts, sports, and cultural activities to develop well-rounded personalities.
+            Sports, arts, community service and character-building activities are available on campus to develop well-rounded personalities.
           </p>
         </div>
 

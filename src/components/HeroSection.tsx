@@ -13,7 +13,7 @@ const HeroSection = () => {
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: `linear-gradient(rgba(0, 90, 156, 0.7), rgba(255, 215, 0, 0.3)), url('https://images.unsplash.com/photo-1487958449943-2429e8be8625?q=80&w=2000')`,
+          backgroundImage: `linear-gradient(rgba(0, 90, 156, 0.7), rgba(255, 215, 0, 0.3)), url('https://fortuneworldschool.com/assets/images/campus-banner.jpg')`,
         }}
       />
       

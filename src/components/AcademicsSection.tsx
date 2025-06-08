@@ -22,10 +22,10 @@ const AcademicsSection = () => {
   ];
 
   const achievements = [
-    'Students Scored 100% in Mathematics',
-    'Top performer in Computer Science',
-    '95% students scored above 90%',
-    'State-level Science Olympiad Winners',
+    'Pre-Nursery to XII comprehensive education',
+    'CBSE-affiliated curriculum excellence',
+    'Critical thinking and creativity focus',
+    'Real-life problem solving approach',
   ];
 
   return (
@@ -35,8 +35,8 @@ const AcademicsSection = () => {
           <h2 className="text-4xl md:text-5xl font-bold text-school-blue mb-4">Academics</h2>
           <div className="w-24 h-1 bg-school-yellow mx-auto mb-6"></div>
           <p className="text-xl text-gray-700 max-w-3xl mx-auto">
-            Our CBSE curriculum is designed to foster critical thinking, creativity, and academic excellence. 
-            We prepare students for success in higher education and beyond.
+            Our curriculum is intended to inspire and engage on a very high level of critical thinking, creativity, 
+            and solution-finding for real-life problems. We offer comprehensive education from Pre-Nursery to XII.
           </p>
         </div>
 
@@ -62,7 +62,7 @@ const AcademicsSection = () => {
         <div className="bg-white rounded-2xl p-8 shadow-lg mb-12">
           <h3 className="text-2xl font-bold text-school-blue mb-6 text-center flex items-center justify-center">
             <Award className="mr-2" />
-            Our Achievements
+            Our Academic Excellence
           </h3>
           <div className="grid md:grid-cols-2 gap-4">
             {achievements.map((achievement, index) => (

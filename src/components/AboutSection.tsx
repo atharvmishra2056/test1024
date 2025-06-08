@@ -52,8 +52,8 @@ const AboutSection = () => {
           <div>
             <h3 className="text-2xl font-bold text-school-blue mb-6">Our Story</h3>
             <p className="text-lg text-gray-700 mb-6 leading-relaxed">
-              Since our establishment in 2012, Fortune World School has been a beacon of educational excellence in Noida. 
-              We believe in nurturing young minds with a perfect blend of academic rigor and holistic development.
+              Fortune World School is a world-class CBSE-affiliated school in Sector 105, Noida, founded under Mohan Charitable Educational Trust. 
+              Our sprawling 4-acre campus features state-of-the-art facilities designed to nurture young minds with academic excellence and holistic development.
             </p>
             
             <div className="grid md:grid-cols-2 gap-6 mb-8">
@@ -77,17 +77,17 @@ const AboutSection = () => {
               <div className="flex items-center mb-6">
                 <img
                   src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face"
-                  alt="Principal"
+                  alt="Principal Sonal Srivastava"
                   className="w-20 h-20 rounded-full mr-4 object-cover"
                 />
                 <div>
-                  <h4 className="text-xl font-bold text-school-blue">Dr. Priya Sharma</h4>
+                  <h4 className="text-xl font-bold text-school-blue">Principal Sonal Srivastava</h4>
                   <p className="text-gray-600">Principal</p>
                 </div>
               </div>
               <p className="text-gray-700 italic">
-                "At Fortune World School, we believe every child is unique and capable of achieving greatness. 
-                Our commitment is to provide an environment where academic excellence meets character building."
+                "The whole purpose of education is to turn mirrors into windows... We strive to create an environment 
+                which stimulates inquiry, creativity, critical thinking, and prepares our students for future challenges."
               </p>
             </div>
           </div>

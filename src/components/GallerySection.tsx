@@ -9,13 +9,13 @@ const GallerySection = () => {
   const categories = ['All', 'Campus Life', 'Annual Day', 'Field Trips', 'Sports Day'];
 
   const galleryItems = [
-    { category: 'Campus Life', image: 'https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=400&h=300&fit=crop', caption: 'Modern School Building' },
-    { category: 'Annual Day', image: 'https://images.unsplash.com/photo-1501854140801-50d01698950b?w=400&h=300&fit=crop', caption: 'Cultural Performance' },
-    { category: 'Field Trips', image: 'https://images.unsplash.com/photo-1472396961693-142e6e269027?w=400&h=300&fit=crop', caption: 'Nature Exploration' },
+    { category: 'Campus Life', image: 'https://ezyschooling.com/fws-exterior2.jpg', caption: 'School facade view' },
+    { category: 'Campus Life', image: 'https://ezyschooling.com/fws-classroom2.jpg', caption: 'Students in classroom' },
+    { category: 'Annual Day', image: 'https://fortuneworldschool.com/images/annual', caption: 'Annual Day Performance' },
+    { category: 'Field Trips', image: 'https://images.unsplash.com/photo-1472396961693-142e6e269027?w=400&h=300&fit=crop', caption: 'Educational Visit' },
     { category: 'Sports Day', image: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=400&h=300&fit=crop', caption: 'Athletic Competition' },
-    { category: 'Campus Life', image: 'https://images.unsplash.com/photo-1581090464777-f3220bbe1b8b?w=400&h=300&fit=crop', caption: 'Science Laboratory' },
+    { category: 'Campus Life', image: 'https://ezyschooling.com/fws-smart-classroom.jpg', caption: 'Smart Classroom' },
     { category: 'Annual Day', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop', caption: 'Award Ceremony' },
-    { category: 'Field Trips', image: 'https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=400&h=300&fit=crop', caption: 'Educational Visit' },
     { category: 'Sports Day', image: 'https://images.unsplash.com/photo-1501854140801-50d01698950b?w=400&h=300&fit=crop', caption: 'Victory Celebration' },
   ];
 

@@ -8,43 +8,50 @@ const FacilitiesSection = () => {
       icon: GraduationCap,
       title: 'Smart Classrooms',
       description: 'Digital boards and modern learning technology',
-      image: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=400&h=300&fit=crop',
+      image: 'https://ezyschooling.com/fws-smart-classroom.jpg',
+      alt: 'Smart classroom with digital board at Fortune World School'
     },
     {
       icon: BookOpen,
       title: 'Science & Robotics Labs',
       description: 'State-of-the-art laboratories for hands-on learning',
-      image: 'https://images.unsplash.com/photo-1581090464777-f3220bbe1b8b?w=400&h=300&fit=crop',
+      image: 'https://uniformapp.in/fws-science-lab.jpg',
+      alt: 'Science and Robotics Lab at Fortune World School'
     },
     {
       icon: BookOpen,
       title: 'Library',
       description: 'Extensive collection of books and digital resources',
       image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop',
+      alt: 'Modern library at Fortune World School'
     },
     {
       icon: Users,
       title: 'Sports Complex',
       description: 'Multi-sport facilities for physical development',
       image: 'https://images.unsplash.com/photo-1501854140801-50d01698950b?w=400&h=300&fit=crop',
+      alt: 'Sports complex at Fortune World School'
     },
     {
       icon: Heart,
       title: 'Infirmary',
       description: '24/7 medical care with trained staff',
       image: 'https://images.unsplash.com/photo-1472396961693-142e6e269027?w=400&h=300&fit=crop',
+      alt: 'Medical infirmary at Fortune World School'
     },
     {
       icon: Bus,
-      title: 'School Buses',
+      title: 'School Transport',
       description: 'Safe and comfortable transportation',
-      image: 'https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=400&h=300&fit=crop',
+      image: 'https://ezyschooling.com/fws-exterior.jpg',
+      alt: 'Front elevation of Fortune World School, Noida'
     },
     {
       icon: Utensils,
       title: 'Cafeteria',
       description: 'Nutritious meals and healthy snacks',
       image: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=400&h=300&fit=crop',
+      alt: 'School cafeteria at Fortune World School'
     },
   ];
 
@@ -55,7 +62,7 @@ const FacilitiesSection = () => {
           <h2 className="text-4xl md:text-5xl font-bold text-school-blue mb-4">World-Class Facilities</h2>
           <div className="w-24 h-1 bg-school-yellow mx-auto mb-6"></div>
           <p className="text-xl text-gray-700 max-w-3xl mx-auto">
-            Our campus is equipped with modern facilities to support every aspect of student development.
+            Our 4-acre campus is equipped with modern facilities to support every aspect of student development.
           </p>
         </div>
 
@@ -68,7 +75,7 @@ const FacilitiesSection = () => {
               <div className="relative h-48 overflow-hidden">
                 <img
                   src={facility.image}
-                  alt={facility.title}
+                  alt={facility.alt}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   loading="lazy"
                 />

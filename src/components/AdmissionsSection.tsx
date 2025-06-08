@@ -12,12 +12,9 @@ const AdmissionsSection = () => {
   ];
 
   const feeStructure = [
-    { grade: 'Pre-Nursery', fee: '₹45,000' },
-    { grade: 'Nursery - UKG', fee: '₹50,000' },
-    { grade: 'Class I - V', fee: '₹55,000' },
-    { grade: 'Class VI - VIII', fee: '₹60,000' },
-    { grade: 'Class IX - X', fee: '₹65,000' },
-    { grade: 'Class XI - XII', fee: '₹70,000' },
+    { grade: 'Pre-Nursery', fee: '₹1.11 L' },
+    { grade: 'Nursery - Class V', fee: '₹1.58 L' },
+    { grade: 'Class VI - XII', fee: '₹1.71 L' },
   ];
 
   return (
@@ -38,7 +35,7 @@ const AdmissionsSection = () => {
             <h3 className="text-xl font-bold text-school-blue">Important Dates</h3>
           </div>
           <p className="text-gray-700">
-            <strong>Admissions Open:</strong> December 1, 2024 | <strong>Last Date:</strong> March 15, 2025
+            <strong>Admissions Open for 2025-26:</strong> Process includes Enquiry → Tour → Registration → Assessment → Admission
           </p>
         </div>
 
@@ -47,15 +44,12 @@ const AdmissionsSection = () => {
           <h3 className="text-2xl font-bold text-school-blue mb-8 text-center">Admission Process</h3>
           <div className="grid md:grid-cols-5 gap-4">
             {admissionSteps.map((item, index) => (
-              <div key={index} className="text-center">
+              <div key={index} className="text-center relative">
                 <div className="bg-school-blue text-white w-16 h-16 rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-4">
                   {item.step}
                 </div>
                 <h4 className="font-semibold text-school-blue mb-2">{item.title}</h4>
                 <p className="text-sm text-gray-600">{item.description}</p>
-                {index < admissionSteps.length - 1 && (
-                  <div className="hidden md:block absolute top-8 left-full w-full h-0.5 bg-school-blue/30 transform translate-x-4"></div>
-                )}
               </div>
             ))}
           </div>
@@ -70,7 +64,7 @@ const AdmissionsSection = () => {
             </h3>
             <div className="space-y-4">
               {[
-                'Pre-Nursery: 2.5 - 3 years',
+                'Pre-Nursery: Minimum 2.5 years',
                 'Nursery: 3 - 4 years',
                 'LKG: 4 - 5 years',
                 'UKG: 5 - 6 years',
@@ -93,14 +87,14 @@ const AdmissionsSection = () => {
             </h3>
             <div className="space-y-3">
               {feeStructure.map((item, index) => (
-                <div key={index} className="flex justify-between items-center py-2 border-b border-gray-200 last:border-0">
+                <div key={index} className="flex justify-between items-center py-3 border-b border-gray-200 last:border-0">
                   <span className="font-medium text-gray-700">{item.grade}</span>
-                  <span className="font-bold text-school-blue">{item.fee}</span>
+                  <span className="font-bold text-school-blue text-lg">{item.fee}</span>
                 </div>
               ))}
             </div>
             <p className="text-sm text-gray-600 mt-4">
-              *Fees include tuition, books, and basic activities. Transport charges separate.
+              *Annual fees include tuition, books, and basic activities. Transport charges separate.
             </p>
           </div>
         </div>
