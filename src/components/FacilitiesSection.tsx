@@ -8,49 +8,49 @@ const FacilitiesSection = () => {
       icon: GraduationCap,
       title: 'Smart Classrooms',
       description: 'Digital boards and modern learning technology',
-      image: 'https://ezyschooling.com/fws-smart-classroom.jpg',
+      image: 'https://www.cmsitportal.org/img/snb1.jpg',
       alt: 'Smart classroom with digital board at Fortune World School'
     },
     {
       icon: BookOpen,
       title: 'Science & Robotics Labs',
       description: 'State-of-the-art laboratories for hands-on learning',
-      image: 'https://uniformapp.in/fws-science-lab.jpg',
+      image: 'https://fortuneworldschool.com/assets/web/images/pages/laboratories-2.jpg',
       alt: 'Science and Robotics Lab at Fortune World School'
     },
     {
       icon: BookOpen,
       title: 'Library',
       description: 'Extensive collection of books and digital resources',
-      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop',
+      image: 'https://fortuneworldschool.com/assets/web/images/pages/lib-3.jpg',
       alt: 'Modern library at Fortune World School'
     },
     {
       icon: Users,
       title: 'Sports Complex',
       description: 'Multi-sport facilities for physical development',
-      image: 'https://images.unsplash.com/photo-1501854140801-50d01698950b?w=400&h=300&fit=crop',
+      image: 'https://images.uniapply.com/uploads/college/image/500/7054/Sport1_210123_211305.jpg',
       alt: 'Sports complex at Fortune World School'
     },
     {
       icon: Heart,
       title: 'Infirmary',
       description: '24/7 medical care with trained staff',
-      image: 'https://images.unsplash.com/photo-1472396961693-142e6e269027?w=400&h=300&fit=crop',
+      image: 'https://fortuneworldschool.com/assets/web/images/health-care-1.jpeg',
       alt: 'Medical infirmary at Fortune World School'
     },
     {
       icon: Bus,
       title: 'School Transport',
       description: 'Safe and comfortable transportation',
-      image: 'https://ezyschooling.com/fws-exterior.jpg',
+      image: 'https://fortuneworldschool.com/assets/web/images/pages/trans-1.jpg',
       alt: 'Front elevation of Fortune World School, Noida'
     },
     {
       icon: Utensils,
       title: 'Cafeteria',
       description: 'Nutritious meals and healthy snacks',
-      image: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=400&h=300&fit=crop',
+      image: 'https://fortuneworldschool.com/assets/web/images/pages/cafe-1.jpg',
       alt: 'School cafeteria at Fortune World School'
     },
   ];
