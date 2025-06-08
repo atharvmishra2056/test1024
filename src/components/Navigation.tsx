@@ -32,14 +32,12 @@ const Navigation = () => {
     }`}>
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          <div className="flex items-center space-x-4">
-            <div className="w-12 h-12 bg-school-red rounded-full flex items-center justify-center">
-              <span className="text-white font-bold text-xl">FW</span>
-            </div>
-            <div>
-              <h1 className="text-xl font-bold text-school-red">Fortune World School</h1>
-              <p className="text-sm text-muted-foreground">Excellence in Education</p>
-            </div>
+          <div className="flex items-center">
+            <img
+              src="https://fortuneworldschool.com/assets/web/images/fw-logo.png"
+              alt="Fortune World School official logo with tagline"
+              className="h-12 w-auto object-contain"
+            />
           </div>
 
           {/* Desktop Navigation */}
