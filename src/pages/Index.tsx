@@ -20,16 +20,19 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <DisclaimerHeader />
       <Navigation />
-      <HeroSection />
-      <AboutSection />
-      <AcademicsSection />
-      <AdmissionsSection />
-      <FacilitiesSection />
-      <CoactivitiesSection />
-      <EventsSection />
-      <GallerySection />
-      <TestimonialsSection />
-      <ContactSection />
+      {/* Add proper spacing to account for fixed headers */}
+      <div className="pt-28">
+        <HeroSection />
+        <AboutSection />
+        <AcademicsSection />
+        <AdmissionsSection />
+        <FacilitiesSection />
+        <CoactivitiesSection />
+        <EventsSection />
+        <GallerySection />
+        <TestimonialsSection />
+        <ContactSection />
+      </div>
       <Footer />
       <BackToTop />
     </div>
