@@ -27,8 +27,8 @@ const GallerySection = () => {
     <section id="gallery" className="py-20 bg-white">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-school-blue mb-4">Gallery</h2>
-          <div className="w-24 h-1 bg-school-yellow mx-auto mb-6"></div>
+          <h2 className="text-4xl md:text-5xl font-bold text-school-red mb-4">Gallery</h2>
+          <div className="w-24 h-1 bg-school-beige mx-auto mb-6"></div>
           <p className="text-xl text-gray-700 max-w-3xl mx-auto">
             Explore the vibrant life at Fortune World School through our photo gallery.
           </p>
@@ -42,8 +42,8 @@ const GallerySection = () => {
               onClick={() => setSelectedCategory(category)}
               className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 ${
                 selectedCategory === category
-                  ? 'bg-school-blue text-white shadow-lg'
-                  : 'bg-gray-100 text-gray-700 hover:bg-school-yellow hover:text-school-blue'
+                  ? 'bg-school-red text-white shadow-lg'
+                  : 'bg-gray-100 text-gray-700 hover:bg-school-beige hover:text-school-red border border-gray-300'
               }`}
             >
               {category}
