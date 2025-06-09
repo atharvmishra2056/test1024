@@ -58,7 +58,7 @@ const AdmissionsSection = () => {
           <h3 className="text-2xl font-bold text-school-blue mb-8 text-center">Admission Process</h3>
           <div className="grid md:grid-cols-5 gap-4">
             {admissionSteps.map((item, index) => <div key={index} className="text-center relative">
-                <div className="bg-school-blue text-white w-16 h-16 rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-4">
+                <div className="bg-school-blue text-white w-16 h-16 rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-4 bg-orange-400">
                   {item.step}
                 </div>
                 <h4 className="font-semibold text-school-blue mb-2">{item.title}</h4>
