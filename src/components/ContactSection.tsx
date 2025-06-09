@@ -92,7 +92,7 @@ const ContactSection = () => {
             {/* Map */}
             <div className="bg-gray-100 rounded-2xl overflow-hidden">
               <iframe
-                src="https://www.google.com/maps/embed/v1/place?q=Fortune+World+School&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8"
+                src="https://www.google.com/maps/embed/v1/place?q=Fortune+World+School+|+Top+CBSE+Schools+in+Noida+|+Best+Cbse+School+Near+Noida&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8"
                 width="100%"
                 height="256"
                 style={{ border: 0 }}
