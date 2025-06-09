@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 
@@ -12,12 +13,13 @@ const Navigation = () => {
       const currentScrollY = window.scrollY;
       
       // Set scrolled state
-      setIsScrolled(currentScrollY > 100);
+      setIsScrolled(currentScrollY > 50);
       
-      // Auto-hide logic
+      // Auto-hide logic - only hide when scrolling down past 100px
       if (currentScrollY > lastScrollY && currentScrollY > 100) {
         // Scrolling down
         setIsVisible(false);
+        setIsOpen(false); // Close mobile menu when hiding
       } else {
         // Scrolling up
         setIsVisible(true);
@@ -43,16 +45,16 @@ const Navigation = () => {
   ];
 
   return (
-    <nav className={`fixed top-12 left-0 right-0 z-40 transition-all duration-300 ${
+    <nav className={`fixed top-8 md:top-12 left-0 right-0 z-40 transition-all duration-300 ${
       isScrolled ? 'bg-white/95 backdrop-blur-md shadow-lg' : 'bg-white/90 backdrop-blur-sm'
     } ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}>
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-12 md:h-16">
           <div className="flex items-center">
             <img
               src="https://fortuneworldschool.com/assets/web/images/fw-logo.png"
               alt="Fortune World School official logo with tagline"
-              className="h-12 w-auto object-contain"
+              className="h-8 md:h-12 w-auto object-contain"
             />
           </div>
 
@@ -74,7 +76,7 @@ const Navigation = () => {
             className="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
             onClick={() => setIsOpen(!isOpen)}
           >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
+            {isOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
         </div>
 

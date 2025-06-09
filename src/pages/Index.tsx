@@ -20,8 +20,8 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <DisclaimerHeader />
       <Navigation />
-      {/* Add proper spacing to account for fixed headers */}
-      <div className="pt-28">
+      {/* Add proper responsive spacing to account for fixed headers */}
+      <div className="pt-20 md:pt-28">
         <HeroSection />
         <AboutSection />
         <AcademicsSection />
