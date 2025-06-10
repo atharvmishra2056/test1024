@@ -34,19 +34,13 @@ const HeroSection = () => {
           Academic Excellence, Global Vision, Moral Integrity
         </p>
         
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <div className="flex justify-center">
           <button 
             onClick={scrollToAbout} 
             className="inline-flex items-center px-8 py-4 bg-school-beige text-school-red font-semibold rounded-full hover:bg-school-white transform hover:scale-105 transition-all duration-300 shadow-xl glass-effect"
           >
             Explore Our Journey
             <ChevronDown className="ml-2 animate-bounce-gentle" size={20} />
-          </button>
-          
-          <button 
-            className="inline-flex items-center px-8 py-4 bg-school-red text-white font-semibold rounded-full hover:bg-school-red/90 transform hover:scale-105 transition-all duration-300 shadow-xl border-2 border-white"
-          >
-            Apply Now
           </button>
         </div>
       </div>

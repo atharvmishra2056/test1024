@@ -16,6 +16,7 @@ import Footer from '../components/Footer';
 import BackToTop from '../components/BackToTop';
 import LikeButton from '../components/LikeButton';
 import PrincipalMessageModal from '../components/PrincipalMessageModal';
+import AdmissionAlert from '../components/AdmissionAlert';
 
 const Index = () => {
   return (
@@ -39,6 +40,7 @@ const Index = () => {
       <BackToTop />
       <LikeButton />
       <PrincipalMessageModal />
+      <AdmissionAlert />
     </div>
   );
 };
