@@ -14,6 +14,7 @@ import TestimonialsSection from '../components/TestimonialsSection';
 import ContactSection from '../components/ContactSection';
 import Footer from '../components/Footer';
 import BackToTop from '../components/BackToTop';
+import LikeButton from '../components/LikeButton';
 
 const Index = () => {
   return (
@@ -21,7 +22,7 @@ const Index = () => {
       <DisclaimerHeader />
       <Navigation />
       {/* Add proper responsive spacing to account for fixed headers */}
-      <div className="pt-20 md:pt-28">
+      <div className="pt-16 md:pt-20 lg:pt-24">
         <HeroSection />
         <AboutSection />
         <AcademicsSection />
@@ -35,6 +36,7 @@ const Index = () => {
       </div>
       <Footer />
       <BackToTop />
+      <LikeButton />
     </div>
   );
 };
