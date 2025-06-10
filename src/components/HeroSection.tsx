@@ -13,16 +13,6 @@ const HeroSection = () => {
     }
   };
 
-  const scrollToContact = () => {
-    const contactSection = document.getElementById('contact');
-    if (contactSection) {
-      contactSection.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
-      });
-    }
-  };
-
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Video Background */}
@@ -54,7 +44,6 @@ const HeroSection = () => {
           </button>
           
           <button 
-            onClick={scrollToContact}
             className="inline-flex items-center px-8 py-4 bg-school-red text-white font-semibold rounded-full hover:bg-school-red/90 transform hover:scale-105 transition-all duration-300 shadow-xl border-2 border-white"
           >
             Apply Now

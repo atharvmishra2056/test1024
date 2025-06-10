@@ -40,6 +40,12 @@ const AboutSection = () => {
     return () => observer.disconnect();
   }, [hasAnimated]);
 
+  const handlePrincipalMessageClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    // Dispatch custom event for principal message modal
+    window.dispatchEvent(new CustomEvent('openPrincipalMessage'));
+  };
+
   return (
     <section id="about" className="py-20 bg-gradient-to-br from-school-beige/20 to-white">
       <div className="container mx-auto px-4">
@@ -89,12 +95,12 @@ const AboutSection = () => {
                 "The whole purpose of education is to turn mirrors into windows... We strive to create an environment 
                 which stimulates inquiry, creativity, critical thinking, and prepares our students for future challenges."
               </p>
-              <a 
-                href="/principal-message" 
-                className="inline-block mt-4 text-school-red hover:text-school-red/80 font-semibold transition-colors"
+              <button 
+                onClick={handlePrincipalMessageClick}
+                className="inline-block mt-4 text-school-red hover:text-school-red/80 font-semibold transition-colors cursor-pointer"
               >
                 Read Full Message →
-              </a>
+              </button>
             </div>
           </div>
         </div>
