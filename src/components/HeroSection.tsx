@@ -1,23 +1,36 @@
+
 import React from 'react';
 import { ChevronDown } from 'lucide-react';
+
 const HeroSection = () => {
   const scrollToAbout = () => {
-    document.getElementById('about')?.scrollIntoView({
-      behavior: 'smooth'
-    });
+    const aboutSection = document.getElementById('about');
+    if (aboutSection) {
+      aboutSection.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
   };
-  return <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+
+  const scrollToContact = () => {
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+      contactSection.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  };
+
+  return (
+    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Video Background */}
       <div className="absolute inset-0">
         <video className="w-full h-full object-cover" autoPlay muted loop playsInline>
           <source src="https://fortuneworldschool.com/uploads/slider/videos/1740726135_videofws.mp4" type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-gradient-to-r from-school-red/70 to-school-beige/30"></div>
-      </div>
-      
-      {/* School Logo */}
-      <div className="absolute top-20 left-1/2 transform -translate-x-1/2 z-20">
-        
       </div>
       
       {/* Content */}
@@ -31,16 +44,30 @@ const HeroSection = () => {
           Academic Excellence, Global Vision, Moral Integrity
         </p>
         
-        <button onClick={scrollToAbout} className="inline-flex items-center px-8 py-4 bg-school-beige text-school-red font-semibold rounded-full hover:bg-school-white transform hover:scale-105 transition-all duration-300 shadow-xl glass-effect">
-          Explore Our Journey
-          <ChevronDown className="ml-2 animate-bounce-gentle" size={20} />
-        </button>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <button 
+            onClick={scrollToAbout} 
+            className="inline-flex items-center px-8 py-4 bg-school-beige text-school-red font-semibold rounded-full hover:bg-school-white transform hover:scale-105 transition-all duration-300 shadow-xl glass-effect"
+          >
+            Explore Our Journey
+            <ChevronDown className="ml-2 animate-bounce-gentle" size={20} />
+          </button>
+          
+          <button 
+            onClick={scrollToContact}
+            className="inline-flex items-center px-8 py-4 bg-school-red text-white font-semibold rounded-full hover:bg-school-red/90 transform hover:scale-105 transition-all duration-300 shadow-xl border-2 border-white"
+          >
+            Apply Now
+          </button>
+        </div>
       </div>
       
       {/* Scroll Indicator */}
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
         <ChevronDown className="text-white" size={32} />
       </div>
-    </section>;
+    </section>
+  );
 };
+
 export default HeroSection;

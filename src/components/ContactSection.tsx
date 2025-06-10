@@ -44,13 +44,13 @@ const ContactSection = () => {
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12">
-          {/* Contact Information */}
-          <div>
+          {/* Contact Information - Now in rounded box */}
+          <div className="bg-gray-50 rounded-2xl p-8">
             <h3 className="text-2xl font-bold text-school-red mb-8">Get In Touch</h3>
             
             <div className="space-y-6 mb-8">
               <div className="flex items-start">
-                <MapPin className="text-school-beige mr-4 mt-1" size={24} />
+                <MapPin className="text-school-red mr-4 mt-1" size={24} />
                 <div>
                   <h4 className="font-semibold text-school-red mb-1">Address</h4>
                   <p className="text-gray-700">
@@ -62,7 +62,7 @@ const ContactSection = () => {
               </div>
 
               <div className="flex items-start">
-                <Phone className="text-school-beige mr-4 mt-1" size={24} />
+                <Phone className="text-school-red mr-4 mt-1" size={24} />
                 <div>
                   <h4 className="font-semibold text-school-red mb-1">Phone</h4>
                   <p className="text-gray-700">+91 98765 43210</p>
@@ -71,7 +71,7 @@ const ContactSection = () => {
               </div>
 
               <div className="flex items-start">
-                <Mail className="text-school-beige mr-4 mt-1" size={24} />
+                <Mail className="text-school-red mr-4 mt-1" size={24} />
                 <div>
                   <h4 className="font-semibold text-school-red mb-1">Email</h4>
                   <p className="text-gray-700">admissions@fortuneworldschool.edu.in</p>
@@ -80,7 +80,7 @@ const ContactSection = () => {
               </div>
 
               <div className="flex items-start">
-                <Clock className="text-school-beige mr-4 mt-1" size={24} />
+                <Clock className="text-school-red mr-4 mt-1" size={24} />
                 <div>
                   <h4 className="font-semibold text-school-red mb-1">Office Hours</h4>
                   <p className="text-gray-700">Monday - Friday: 8:00 AM to 2:30 PM</p>

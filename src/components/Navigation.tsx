@@ -32,11 +32,17 @@ const Navigation = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [lastScrollY]);
 
+  const handlePrincipalMessageClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    // Dispatch custom event for principal message modal
+    window.dispatchEvent(new CustomEvent('openPrincipalMessage'));
+  };
+
   const navItems = [
     { name: 'Home', href: '#home' },
     { name: 'About', href: '#about' },
     { name: 'Academics', href: '#academics' },
-    { name: 'Principal\'s Message', href: '/principal-message' },
+    { name: 'Principal\'s Message', href: '#', onClick: handlePrincipalMessageClick },
     { name: 'Admissions', href: '#admissions' },
     { name: 'Facilities', href: '#facilities' },
     { name: 'Activities', href: '#activities' },
@@ -45,9 +51,9 @@ const Navigation = () => {
   ];
 
   return (
-    <nav className={`fixed top-8 md:top-12 left-0 right-0 z-40 transition-all duration-300 ${
+    <nav className={`fixed top-4 md:top-8 left-0 right-0 z-40 transition-all duration-300 ${
       isScrolled ? 'bg-white/95 backdrop-blur-md shadow-lg' : 'bg-white/90 backdrop-blur-sm'
-    } ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}>
+    } ${isVisible ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'}`}>
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-12 md:h-16">
           <div className="flex items-center">
@@ -64,7 +70,8 @@ const Navigation = () => {
               <a
                 key={item.name}
                 href={item.href}
-                className="text-foreground hover:text-school-red transition-colors duration-300 font-medium text-sm"
+                onClick={item.onClick}
+                className="text-foreground hover:text-school-red transition-colors duration-300 font-medium text-sm cursor-pointer"
               >
                 {item.name}
               </a>
@@ -87,8 +94,13 @@ const Navigation = () => {
               <a
                 key={item.name}
                 href={item.href}
-                className="block py-2 px-4 text-foreground hover:text-school-red hover:bg-gray-50 transition-colors duration-300"
-                onClick={() => setIsOpen(false)}
+                onClick={(e) => {
+                  if (item.onClick) {
+                    item.onClick(e);
+                  }
+                  setIsOpen(false);
+                }}
+                className="block py-2 px-4 text-foreground hover:text-school-red hover:bg-gray-50 transition-colors duration-300 cursor-pointer"
               >
                 {item.name}
               </a>

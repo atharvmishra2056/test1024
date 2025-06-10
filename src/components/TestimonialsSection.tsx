@@ -37,7 +37,7 @@ const TestimonialsSection = () => {
       setCurrentIndex((prevIndex) => 
         prevIndex === testimonials.length - 1 ? 0 : prevIndex + 1
       );
-    }, 5000);
+    }, 8000); // Reduced from 5000ms to 8000ms for slower auto-scroll
 
     return () => clearInterval(timer);
   }, [testimonials.length]);
@@ -54,8 +54,8 @@ const TestimonialsSection = () => {
     <section className="py-20 bg-gray-50">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-school-blue mb-4">What Our Community Says</h2>
-          <div className="w-24 h-1 bg-school-yellow mx-auto mb-6"></div>
+          <h2 className="text-4xl md:text-5xl font-bold text-school-red mb-4">What Our Community Says</h2>
+          <div className="w-24 h-1 bg-school-beige mx-auto mb-6"></div>
           <p className="text-xl text-gray-700 max-w-3xl mx-auto">
             Hear from our parents, students, and alumni about their experience at Fortune World School.
           </p>
@@ -64,7 +64,7 @@ const TestimonialsSection = () => {
         <div className="relative max-w-4xl mx-auto">
           {/* Main Testimonial */}
           <div className="bg-white rounded-2xl p-8 md:p-12 shadow-xl">
-            <Quote className="text-school-yellow mb-6" size={48} />
+            <Quote className="text-school-beige mb-6" size={48} />
             <blockquote className="text-xl md:text-2xl text-gray-700 mb-8 leading-relaxed italic">
               "{testimonials[currentIndex].quote}"
             </blockquote>
@@ -75,7 +75,7 @@ const TestimonialsSection = () => {
                 className="w-16 h-16 rounded-full mr-4 object-cover"
               />
               <div>
-                <h4 className="text-xl font-bold text-school-blue">{testimonials[currentIndex].name}</h4>
+                <h4 className="text-xl font-bold text-school-red">{testimonials[currentIndex].name}</h4>
                 <p className="text-gray-600">{testimonials[currentIndex].role}</p>
               </div>
             </div>
@@ -84,25 +84,27 @@ const TestimonialsSection = () => {
           {/* Navigation Buttons */}
           <button
             onClick={prevTestimonial}
-            className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-school-blue text-white p-3 rounded-full hover:bg-blue-700 transition-colors duration-300"
+            className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-school-red text-white p-3 rounded-full hover:bg-school-red/90 transition-colors duration-300 shadow-lg"
           >
             <ChevronLeft size={24} />
           </button>
           <button
             onClick={nextTestimonial}
-            className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-school-blue text-white p-3 rounded-full hover:bg-blue-700 transition-colors duration-300"
+            className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-school-red text-white p-3 rounded-full hover:bg-school-red/90 transition-colors duration-300 shadow-lg"
           >
             <ChevronRight size={24} />
           </button>
 
-          {/* Dots Indicator */}
+          {/* Dots Indicator - Fixed visibility */}
           <div className="flex justify-center mt-8 space-x-2">
             {testimonials.map((_, index) => (
               <button
                 key={index}
                 onClick={() => setCurrentIndex(index)}
-                className={`w-3 h-3 rounded-full transition-colors duration-300 ${
-                  index === currentIndex ? 'bg-school-blue' : 'bg-gray-300'
+                className={`w-3 h-3 rounded-full transition-colors duration-300 border-2 ${
+                  index === currentIndex 
+                    ? 'bg-school-red border-school-red' 
+                    : 'bg-transparent border-school-red hover:bg-school-red/30'
                 }`}
               />
             ))}

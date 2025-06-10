@@ -15,14 +15,15 @@ import ContactSection from '../components/ContactSection';
 import Footer from '../components/Footer';
 import BackToTop from '../components/BackToTop';
 import LikeButton from '../components/LikeButton';
+import PrincipalMessageModal from '../components/PrincipalMessageModal';
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <DisclaimerHeader />
       <Navigation />
-      {/* Add proper responsive spacing to account for fixed headers */}
-      <div className="pt-16 md:pt-20 lg:pt-24">
+      {/* Reduced gap between headers and adjusted for new positioning */}
+      <div className="pt-12 md:pt-16 lg:pt-20">
         <HeroSection />
         <AboutSection />
         <AcademicsSection />
@@ -37,6 +38,7 @@ const Index = () => {
       <Footer />
       <BackToTop />
       <LikeButton />
+      <PrincipalMessageModal />
     </div>
   );
 };
