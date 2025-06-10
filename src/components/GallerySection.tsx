@@ -13,7 +13,7 @@ const GallerySection = () => {
     { category: 'Campus Life', image: 'https://www.edustoke.com/assets/uploads-new/e66cf84e-8660-4b56-be0a-30b444ef951e.jpeg', caption: 'Students in classroom' },
     { category: 'Annual Day', image: 'https://delhiworldschool.com/wp-content/uploads/2025/01/annual13-1.png', caption: 'Annual Day Performance' },
     { category: 'Field Trips', image: 'https://media.fortuneindia.com/fortune-india/import/2024-10-09/mia8jwsk/University.jpg?w=640&auto=format,compress&fit=max&q=70', caption: 'Educational Visit' },
-    { category: 'Sports Day', image: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=400&h=300&fit=crop', caption: 'Athletic Competition' },
+    { category: 'Sports Day', image: 'https://i.pinimg.com/736x/fb/9c/a2/fb9ca2875dafd0e0f28607cf0bf2f57e.jpg', caption: 'Athletic Competition' },
     { category: 'Campus Life', image: 'https://fortuneworldschool.com/assets/web/images/3.jpg' },
     { category: 'Annual Day', image: 'https://i.ibb.co/QFX1Bvsk/487150596-1067804302035931-58532030792832080-n.jpg', caption: 'Award Ceremony' },
     { category: 'Sports Day', image: 'https://sanfortworldschool.com/wp-content/uploads/2024/02/IMG_4470-1024x683.jpg', caption: 'Victory Celebration' },
