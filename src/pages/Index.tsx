@@ -1,3 +1,4 @@
+
 import React from 'react';
 import DisclaimerHeader from '../components/DisclaimerHeader';
 import Navigation from '../components/Navigation';
@@ -18,7 +19,6 @@ import BackToTop from '../components/BackToTop';
 import LikeButton from '../components/LikeButton';
 import PrincipalMessageModal from '../components/PrincipalMessageModal';
 import AdmissionAlert from '../components/AdmissionAlert';
-import ThemeToggle from '../components/ThemeToggle';
 
 const Index = () => {
   return (
@@ -43,7 +43,6 @@ const Index = () => {
       <Footer />
       <BackToTop />
       <LikeButton />
-      <ThemeToggle />
       <PrincipalMessageModal />
       <AdmissionAlert />
     </div>

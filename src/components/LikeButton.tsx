@@ -8,7 +8,7 @@ const LikeButton = () => {
   const { likeCount, isLiked, isLoading, incrementLike } = useLike();
 
   return (
-    <div className="fixed right-4 top-1/2 -translate-y-12 z-50">
+    <div className="fixed right-4 top-1/2 -translate-y-1/2 z-50">
       <div className="bg-white/90 backdrop-blur-sm border border-gray-200 rounded-full p-2 shadow-lg hover:shadow-xl transition-all duration-300">
         <Button
           onClick={incrementLike}
