@@ -10,7 +10,7 @@ const TestimonialsSection = () => {
       name: 'Mrs. Priyanka Gupta',
       role: 'Parent',
       quote: 'Fortune World School has been instrumental in shaping my daughter\'s character. The teachers are dedicated and the environment is nurturing.',
-      image: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100&h=100&fit=crop&crop=face',
+      image: 'https://gweca.ac.in/files/faculty/85.jpg',
     },
     {
       name: 'Rahul Sharma',
