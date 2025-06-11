@@ -7,6 +7,7 @@ import AboutSection from '../components/AboutSection';
 import AcademicsSection from '../components/AcademicsSection';
 import AdmissionsSection from '../components/AdmissionsSection';
 import FacilitiesSection from '../components/FacilitiesSection';
+import AcademicExcellenceSection from '../components/AcademicExcellenceSection';
 import CoactivitiesSection from '../components/CoactivitiesSection';
 import EventsSection from '../components/EventsSection';
 import StudentCouncilSection from '../components/StudentCouncilSection';
@@ -31,6 +32,7 @@ const Index = () => {
         <AcademicsSection />
         <AdmissionsSection />
         <FacilitiesSection />
+        <AcademicExcellenceSection />
         <CoactivitiesSection />
         <EventsSection />
         <StudentCouncilSection />
