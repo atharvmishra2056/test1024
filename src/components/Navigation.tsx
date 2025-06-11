@@ -32,17 +32,10 @@ const Navigation = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [lastScrollY]);
 
-  const handlePrincipalMessageClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    // Dispatch custom event for principal message modal
-    window.dispatchEvent(new CustomEvent('openPrincipalMessage'));
-  };
-
   const navItems = [
     { name: 'Home', href: '#home' },
     { name: 'About', href: '#about' },
     { name: 'Academics', href: '#academics' },
-    { name: 'Principal\'s Message', href: '#', onClick: handlePrincipalMessageClick },
     { name: 'Admissions', href: '#admissions' },
     { name: 'Facilities', href: '#facilities' },
     { name: 'Activities', href: '#activities' },
@@ -70,7 +63,6 @@ const Navigation = () => {
               <a
                 key={item.name}
                 href={item.href}
-                onClick={item.onClick}
                 className="text-foreground hover:text-school-red transition-colors duration-300 font-medium text-sm cursor-pointer"
               >
                 {item.name}
@@ -94,12 +86,7 @@ const Navigation = () => {
               <a
                 key={item.name}
                 href={item.href}
-                onClick={(e) => {
-                  if (item.onClick) {
-                    item.onClick(e);
-                  }
-                  setIsOpen(false);
-                }}
+                onClick={() => setIsOpen(false)}
                 className="block py-2 px-4 text-foreground hover:text-school-red hover:bg-gray-50 transition-colors duration-300 cursor-pointer"
               >
                 {item.name}
