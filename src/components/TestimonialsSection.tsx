@@ -63,7 +63,7 @@ const TestimonialsSection = () => {
 
         <div className="relative max-w-4xl mx-auto">
           {/* Main Testimonial */}
-          <div className="bg-white rounded-2xl p-8 md:p-12 shadow-xl">
+          <div className="bg-white rounded-2xl p-8 md:p-12 shadow-xl mx-8 md:mx-16">
             <Quote className="text-school-beige mb-6" size={48} />
             <blockquote className="text-xl md:text-2xl text-gray-700 mb-8 leading-relaxed italic">
               "{testimonials[currentIndex].quote}"
@@ -81,21 +81,21 @@ const TestimonialsSection = () => {
             </div>
           </div>
 
-          {/* Navigation Buttons */}
+          {/* Navigation Buttons - Moved further outside */}
           <button
             onClick={prevTestimonial}
-            className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-school-red text-white p-3 rounded-full hover:bg-school-red/90 transition-colors duration-300 shadow-lg"
+            className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-school-red text-white p-3 rounded-full hover:bg-school-red/90 transition-colors duration-300 shadow-lg z-10"
           >
             <ChevronLeft size={24} />
           </button>
           <button
             onClick={nextTestimonial}
-            className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-school-red text-white p-3 rounded-full hover:bg-school-red/90 transition-colors duration-300 shadow-lg"
+            className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-school-red text-white p-3 rounded-full hover:bg-school-red/90 transition-colors duration-300 shadow-lg z-10"
           >
             <ChevronRight size={24} />
           </button>
 
-          {/* Dots Indicator - Fixed visibility */}
+          {/* Dots Indicator */}
           <div className="flex justify-center mt-8 space-x-2">
             {testimonials.map((_, index) => (
               <button
