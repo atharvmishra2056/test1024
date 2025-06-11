@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { MapPin, Phone, Mail, Clock, Send, ExternalLink } from 'lucide-react';
 import { useToast } from '../hooks/use-toast';
@@ -8,6 +7,7 @@ const ContactSection = () => {
     name: '',
     class: '',
     mobile: '',
+    email: '',
     message: '',
   });
   const { toast } = useToast();
@@ -18,7 +18,7 @@ const ContactSection = () => {
       title: "Message Sent!",
       description: "Thank you for your inquiry. We'll get back to you soon.",
     });
-    setFormData({ name: '', class: '', mobile: '', message: '' });
+    setFormData({ name: '', class: '', mobile: '', email: '', message: '' });
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
