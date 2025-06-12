@@ -41,16 +41,6 @@ const BackToTop = () => {
   const scrollToTop = () => {
     setShowPopup(true);
     
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
-
-    // Hide popup when scroll completes (approximate timing)
-    setTimeout(() => {
-      setShowPopup(false);
-    }, 1500);
-  };
   // Smooth scroll to top
     const scrollToTopSmoothly = () => {
       const currentPosition = window.pageYOffset;
