@@ -51,6 +51,22 @@ const BackToTop = () => {
       setShowPopup(false);
     }, 1500);
   };
+  // Smooth scroll to top
+    const scrollToTopSmoothly = () => {
+      const currentPosition = window.pageYOffset;
+      if (currentPosition > 0) {
+        window.requestAnimationFrame(scrollToTopSmoothly);
+        window.scrollTo(0, currentPosition - currentPosition / 8);
+      } else {
+        // Hide popup when scroll completes
+        setTimeout(() => {
+          setShowPopup(false);
+        }, 500);
+      }
+    };
+    
+    scrollToTopSmoothly();
+};
 
   return (
     <>
