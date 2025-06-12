@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -82,6 +83,10 @@ export default {
 					'50%': { transform: 'translateX(100%)' },
 					'100%': { transform: 'translateX(-100%)' }
 				},
+				'glow-clockwise': {
+					'0%': { transform: 'rotate(0deg)' },
+					'100%': { transform: 'rotate(360deg)' }
+				},
 				'scale-in': {
 					'0%': { transform: 'scale(0.8)', opacity: '0' },
 					'100%': { transform: 'scale(1)', opacity: '1' }
@@ -97,6 +102,7 @@ export default {
 				'slide-in-right': 'slide-in-right 0.8s ease-out',
 				'bounce-gentle': 'bounce-gentle 2s infinite',
 				'border-move': 'border-move 3s linear infinite',
+				'glow-clockwise': 'glow-clockwise 2s linear infinite',
 				'scale-in': 'scale-in 0.3s ease-out',
 				'pop-twice': 'pop-twice 1s ease-in-out'
 			}
