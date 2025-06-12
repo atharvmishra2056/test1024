@@ -36,8 +36,10 @@ const HeroSection = () => {
         
         <div className="flex justify-center">
           <div className="relative group">
-            {/* Glowing border animation */}
-            <div className="absolute -inset-1 bg-gradient-to-r from-school-beige via-school-red to-school-beige rounded-full blur opacity-75 animate-glow-rotate"></div>
+            {/* Moving glow border animation */}
+            <div className="absolute -inset-1 rounded-full overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-school-beige to-transparent animate-border-move rounded-full blur-sm opacity-75"></div>
+            </div>
             <button 
               onClick={scrollToAbout} 
               className="relative inline-flex items-center px-8 py-4 bg-school-beige text-school-red font-semibold rounded-full hover:bg-school-white transform hover:scale-105 transition-all duration-300 shadow-xl"

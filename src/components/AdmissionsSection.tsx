@@ -137,11 +137,13 @@ const AdmissionsSection = () => {
           </div>
         </div>
 
-        {/* CTA Button with Glow Effect */}
+        {/* CTA Button with Moving Glow Effect */}
         <div className="text-center mt-12">
           <div className="relative inline-block group">
-            {/* Glowing border animation - only on hover */}
-            <div className="absolute -inset-1 bg-gradient-to-r from-school-red via-school-beige to-school-red rounded-full blur opacity-0 group-hover:opacity-75 transition-opacity duration-300 animate-glow-rotate"></div>
+            {/* Moving glow border animation - only on hover */}
+            <div className="absolute -inset-1 rounded-full overflow-hidden opacity-0 group-hover:opacity-75 transition-opacity duration-300">
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-school-red to-transparent animate-border-move rounded-full blur-sm"></div>
+            </div>
             <button 
               onClick={scrollToContact}
               className="relative bg-school-red text-white px-10 py-4 rounded-full text-lg font-semibold hover:bg-school-red/90 transform hover:scale-105 transition-all duration-300 shadow-xl"
