@@ -35,13 +35,17 @@ const HeroSection = () => {
         </p>
         
         <div className="flex justify-center">
-          <button 
-            onClick={scrollToAbout} 
-            className="inline-flex items-center px-8 py-4 bg-school-beige text-school-red font-semibold rounded-full hover:bg-school-white transform hover:scale-105 transition-all duration-300 shadow-xl glass-effect"
-          >
-            Explore Our Journey
-            <ChevronDown className="ml-2 animate-bounce-gentle" size={20} />
-          </button>
+          <div className="relative group">
+            {/* Glowing border animation */}
+            <div className="absolute -inset-1 bg-gradient-to-r from-school-beige via-school-red to-school-beige rounded-full blur opacity-75 animate-glow-rotate"></div>
+            <button 
+              onClick={scrollToAbout} 
+              className="relative inline-flex items-center px-8 py-4 bg-school-beige text-school-red font-semibold rounded-full hover:bg-school-white transform hover:scale-105 transition-all duration-300 shadow-xl"
+            >
+              Explore Our Journey
+              <ChevronDown className="ml-2 animate-bounce-gentle" size={20} />
+            </button>
+          </div>
         </div>
       </div>
       

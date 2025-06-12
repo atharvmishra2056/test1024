@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { CheckCircle, Calendar, Users, DollarSign } from 'lucide-react';
 
@@ -138,14 +137,18 @@ const AdmissionsSection = () => {
           </div>
         </div>
 
-        {/* CTA Button */}
+        {/* CTA Button with Glow Effect */}
         <div className="text-center mt-12">
-          <button 
-            onClick={scrollToContact}
-            className="bg-school-red text-white px-10 py-4 rounded-full text-lg font-semibold hover:bg-school-red/90 transform hover:scale-105 transition-all duration-300 shadow-xl"
-          >
-            Apply Now
-          </button>
+          <div className="relative inline-block group">
+            {/* Glowing border animation - only on hover */}
+            <div className="absolute -inset-1 bg-gradient-to-r from-school-red via-school-beige to-school-red rounded-full blur opacity-0 group-hover:opacity-75 transition-opacity duration-300 animate-glow-rotate"></div>
+            <button 
+              onClick={scrollToContact}
+              className="relative bg-school-red text-white px-10 py-4 rounded-full text-lg font-semibold hover:bg-school-red/90 transform hover:scale-105 transition-all duration-300 shadow-xl"
+            >
+              Apply Now
+            </button>
+          </div>
         </div>
       </div>
     </section>
