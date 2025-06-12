@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -77,10 +78,22 @@ export default {
 					'0%, 100%': { transform: 'translateY(0)' },
 					'50%': { transform: 'translateY(-10px)' }
 				},
-				'border-move': {
-					'0%': { transform: 'translateX(-100%)' },
-					'50%': { transform: 'translateX(100%)' },
-					'100%': { transform: 'translateX(-100%)' }
+				'glow-rotate': {
+					'0%': {
+						'background-position': '0% 50%'
+					},
+					'25%': {
+						'background-position': '100% 50%'
+					},
+					'50%': {
+						'background-position': '100% 100%'
+					},
+					'75%': {
+						'background-position': '0% 100%'
+					},
+					'100%': {
+						'background-position': '0% 50%'
+					}
 				},
 				'scale-in': {
 					'0%': { transform: 'scale(0.8)', opacity: '0' },
@@ -96,7 +109,7 @@ export default {
 				'fade-in': 'fade-in 0.8s ease-out',
 				'slide-in-right': 'slide-in-right 0.8s ease-out',
 				'bounce-gentle': 'bounce-gentle 2s infinite',
-				'border-move': 'border-move 3s linear infinite',
+				'glow-rotate': 'glow-rotate 3s linear infinite',
 				'scale-in': 'scale-in 0.3s ease-out',
 				'pop-twice': 'pop-twice 1s ease-in-out'
 			}

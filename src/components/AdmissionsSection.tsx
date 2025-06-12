@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { CheckCircle, Calendar, Users, DollarSign } from 'lucide-react';
 
@@ -141,8 +142,14 @@ const AdmissionsSection = () => {
         <div className="text-center mt-12">
           <div className="relative inline-block group">
             {/* Moving glow border animation - only on hover */}
-            <div className="absolute -inset-1 rounded-full overflow-hidden opacity-0 group-hover:opacity-75 transition-opacity duration-300">
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-school-red to-transparent animate-border-move rounded-full blur-sm"></div>
+            <div className="absolute -inset-1 rounded-full opacity-0 group-hover:opacity-90 transition-opacity duration-300">
+              <div 
+                className="w-full h-full rounded-full blur-sm animate-glow-rotate"
+                style={{
+                  background: 'conic-gradient(from 0deg, transparent, transparent, white, transparent, transparent)',
+                  backgroundSize: '400% 400%'
+                }}
+              ></div>
             </div>
             <button 
               onClick={scrollToContact}
