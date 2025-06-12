@@ -41,13 +41,16 @@ const BackToTop = () => {
   const scrollToTop = () => {
     setShowPopup(true);
     
-  // Smooth scroll to top
+    // Smooth scroll to top with threshold check
     const scrollToTopSmoothly = () => {
       const currentPosition = window.pageYOffset;
-      if (currentPosition > 0) {
+      // Use a threshold of 5px to ensure we reach exactly 0
+      if (currentPosition > 5) {
         window.requestAnimationFrame(scrollToTopSmoothly);
         window.scrollTo(0, currentPosition - currentPosition / 8);
       } else {
+        // Force scroll to exactly 0
+        window.scrollTo(0, 0);
         // Hide popup when scroll completes
         setTimeout(() => {
           setShowPopup(false);
@@ -56,7 +59,7 @@ const BackToTop = () => {
     };
     
     scrollToTopSmoothly();
-};
+  };
 
   return (
     <>
