@@ -5,26 +5,32 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
-import CursorFollower from "./components/CursorFollower"; // Import the CursorFollower
+import CursorFollower from "./components/CursorFollower";
+import { ThemeProvider } from "./components/ThemeProvider";
+import { AppSettingsProvider } from "./contexts/AppSettingsContext";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        {/* Render CursorFollower directly in App.tsx */}
-        {/* This ensures it's always present and positioned globally */}
-        <CursorFollower /> 
-        <Routes>
-          <Route path="/" element={<Index />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
+    {/* Provides theme switching (light/dark) functionality */}
+    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+      {/* Provides app-specific settings like cursor and modal states */}
+      <AppSettingsProvider>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            {/* The cursor follower now controls its own visibility via context */}
+            <CursorFollower />
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </BrowserRouter>
+        </TooltipProvider>
+      </AppSettingsProvider>
+    </ThemeProvider>
   </QueryClientProvider>
 );
 
