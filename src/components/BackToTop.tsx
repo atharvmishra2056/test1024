@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { ChevronUp, Rocket } from 'lucide-react';
 
@@ -14,20 +13,17 @@ const BackToTop = () => {
       const windowHeight = window.innerHeight;
       const documentHeight = document.documentElement.scrollHeight;
       
-      // Show button when scrolled down 300px
       if (scrollTop > 300) {
         setIsVisible(true);
       } else {
         setIsVisible(false);
       }
 
-      // Check if user is at the bottom of the page
       const atBottom = scrollTop + windowHeight >= documentHeight - 10;
       
       if (atBottom && !isAtBottom) {
         setIsAtBottom(true);
         setShouldPop(true);
-        // Reset pop animation after it plays
         setTimeout(() => setShouldPop(false), 1000);
       } else if (!atBottom) {
         setIsAtBottom(false);
@@ -40,25 +36,39 @@ const BackToTop = () => {
 
   const scrollToTop = () => {
     setShowPopup(true);
-    
-    // Smooth scroll to top with threshold check
-    const scrollToTopSmoothly = () => {
-      const currentPosition = window.pageYOffset;
-      // Use a threshold of 5px to ensure we reach exactly 0
-      if (currentPosition > 5) {
-        window.requestAnimationFrame(scrollToTopSmoothly);
-        window.scrollTo(0, currentPosition - currentPosition / 8);
+
+    const duration = 800; // Animation duration in milliseconds
+    const startPosition = window.pageYOffset;
+    let startTime: number | null = null;
+
+    // Easing function for a smooth acceleration and deceleration effect
+    const easeInOutQuad = (t: number) => {
+      return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+    };
+
+    const animationStep = (timestamp: number) => {
+      if (!startTime) {
+        startTime = timestamp;
+      }
+
+      const elapsed = timestamp - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const easedProgress = easeInOutQuad(progress);
+      
+      window.scrollTo(0, startPosition - startPosition * easedProgress);
+
+      if (elapsed < duration) {
+        requestAnimationFrame(animationStep);
       } else {
-        // Force scroll to exactly 0
+        // Ensure it ends exactly at the top
         window.scrollTo(0, 0);
-        // Hide popup when scroll completes
         setTimeout(() => {
           setShowPopup(false);
         }, 500);
       }
     };
-    
-    scrollToTopSmoothly();
+
+    requestAnimationFrame(animationStep);
   };
 
   return (
