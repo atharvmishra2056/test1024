@@ -34,8 +34,8 @@ const FluidBackground = () => {
     if (!ctx) return;
 
     const resizeCanvas = () => {
-      canvas.width = rect.width;
-      canvas.height = rect.height;
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
       // Re-initialize particles on resize to avoid them going off-screen
       // Or simply adjust their positions if they are too far
       // For simplicity, we'll re-init here for now.
