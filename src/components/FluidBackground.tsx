@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef } from 'react';
 
 const FluidBackground = () => {
@@ -22,19 +21,43 @@ const FluidBackground = () => {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
+    // Set canvas size to parent element's size
     const resizeCanvas = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      const parent = canvas.parentElement;
+      if (parent) {
+        const rect = parent.getBoundingClientRect();
+        canvas.width = rect.width;
+        canvas.height = rect.height;
+      }
     };
 
+    // Track mouse position globally (even outside canvas)
     const handleMouseMove = (e: MouseEvent) => {
-      mouseRef.current = {
-        x: e.clientX,
-        y: e.clientY
-      };
+      const parent = canvas.parentElement;
+      if (parent) {
+        const rect = parent.getBoundingClientRect();
+        mouseRef.current = {
+          x: e.clientX - rect.left,
+          y: e.clientY - rect.top
+        };
+      } else {
+        mouseRef.current = { x: e.clientX, y: e.clientY };
+      }
     };
 
-    // Initialize particles
+    // If mouse leaves the window, let the bubbles follow the last known direction
+    const handleMouseLeave = () => {
+      // Optionally, you can set the mouse to the center of the canvas
+      const parent = canvas.parentElement;
+      if (parent) {
+        const rect = parent.getBoundingClientRect();
+        mouseRef.current = {
+          x: rect.width / 2,
+          y: rect.height / 2
+        };
+      }
+    };
+
     const initParticles = () => {
       particlesRef.current = [];
       for (let i = 0; i < 15; i++) {
@@ -51,19 +74,20 @@ const FluidBackground = () => {
     };
 
     const animate = () => {
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.02)';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      particlesRef.current.forEach((particle, index) => {
-        // Mouse influence
+      particlesRef.current.forEach((particle) => {
+        // Mouse influence is always active
         const dx = mouseRef.current.x - particle.x;
         const dy = mouseRef.current.y - particle.y;
         const distance = Math.sqrt(dx * dx + dy * dy);
-        
+
         if (distance < 200) {
           const force = (200 - distance) / 200;
-          particle.vx += (dx / distance) * force * 0.01;
-          particle.vy += (dy / distance) * force * 0.01;
+          if (distance !== 0) {
+            particle.vx += (dx / distance) * force * 0.01;
+            particle.vy += (dy / distance) * force * 0.01;
+          }
           particle.hue = (particle.hue + 1) % 360;
         }
 
@@ -84,7 +108,6 @@ const FluidBackground = () => {
           particle.x, particle.y, 0,
           particle.x, particle.y, particle.size
         );
-        
         gradient.addColorStop(0, `hsla(${particle.hue}, 70%, 60%, ${particle.alpha})`);
         gradient.addColorStop(0.5, `hsla(${particle.hue + 20}, 60%, 50%, ${particle.alpha * 0.5})`);
         gradient.addColorStop(1, 'transparent');
@@ -104,10 +127,12 @@ const FluidBackground = () => {
 
     window.addEventListener('resize', resizeCanvas);
     window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mouseleave', handleMouseLeave);
 
     return () => {
       window.removeEventListener('resize', resizeCanvas);
       window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseleave', handleMouseLeave);
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);
       }
@@ -118,7 +143,7 @@ const FluidBackground = () => {
     <canvas
       ref={canvasRef}
       className="absolute inset-0 pointer-events-none opacity-30"
-      style={{ mixBlendMode: 'screen' }}
+      aria-hidden="true"
     />
   );
 };
