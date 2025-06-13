@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { Heart } from 'lucide-react';
 import { useLike } from '../hooks/useLike';
@@ -8,9 +7,9 @@ const LikeButton = () => {
   const { likeCount, isLiked, isLoading, incrementLike } = useLike();
   const [showAnimations, setShowAnimations] = useState(false);
 
-  // Control animation visibility
+  // Control animation visibility - fix the logic
   useEffect(() => {
-    if (isLiked && !showAnimations) {
+    if (isLiked) {
       setShowAnimations(true);
       // Hide animations after 3 seconds
       const timer = setTimeout(() => {
@@ -19,7 +18,7 @@ const LikeButton = () => {
       
       return () => clearTimeout(timer);
     }
-  }, [isLiked, showAnimations]);
+  }, [isLiked]);
 
   return (
     <div className="fixed right-4 top-1/2 -translate-y-1/2 z-50">

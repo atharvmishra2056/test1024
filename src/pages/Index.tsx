@@ -19,6 +19,7 @@ import BackToTop from '../components/BackToTop';
 import LikeButton from '../components/LikeButton';
 import PrincipalMessageModal from '../components/PrincipalMessageModal';
 import AdmissionAlert from '../components/AdmissionAlert';
+import CursorFollower from '../components/CursorFollower';
 
 const Index = () => {
   return (
@@ -45,6 +46,7 @@ const Index = () => {
       <LikeButton />
       <PrincipalMessageModal />
       <AdmissionAlert />
+      <CursorFollower />
     </div>
   );
 };
