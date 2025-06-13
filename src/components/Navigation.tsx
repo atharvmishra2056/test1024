@@ -1,6 +1,6 @@
-
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
+import { SettingsMenu } from './SettingsMenu'; // Import the new settings menu component
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,16 +12,12 @@ const Navigation = () => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
       
-      // Set scrolled state
       setIsScrolled(currentScrollY > 50);
       
-      // Auto-hide logic - only hide when scrolling down past 100px
       if (currentScrollY > lastScrollY && currentScrollY > 100) {
-        // Scrolling down
         setIsVisible(false);
-        setIsOpen(false); // Close mobile menu when hiding
+        setIsOpen(false);
       } else {
-        // Scrolling up
         setIsVisible(true);
       }
       
@@ -45,7 +41,7 @@ const Navigation = () => {
 
   return (
     <nav className={`fixed top-4 md:top-8 left-0 right-0 z-40 transition-all duration-300 ${
-      isScrolled ? 'bg-white/95 backdrop-blur-md shadow-lg' : 'bg-white/90 backdrop-blur-sm'
+      isScrolled ? 'bg-white/95 dark:bg-zinc-900/95 backdrop-blur-md shadow-lg' : 'bg-white/90 dark:bg-zinc-900/80 backdrop-blur-sm'
     } ${isVisible ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'}`}>
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-12 md:h-16">
@@ -58,7 +54,7 @@ const Navigation = () => {
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex space-x-6">
+          <div className="hidden lg:flex items-center space-x-6">
             {navItems.map((item) => (
               <a
                 key={item.name}
@@ -70,24 +66,29 @@ const Navigation = () => {
             ))}
           </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            className="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
-            onClick={() => setIsOpen(!isOpen)}
-          >
-            {isOpen ? <X size={20} /> : <Menu size={20} />}
-          </button>
+          <div className="flex items-center gap-2">
+            {/* The new settings menu is added here */}
+            <SettingsMenu />
+            
+            {/* Mobile Menu Button */}
+            <button
+              className="lg:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-zinc-800 transition-colors"
+              onClick={() => setIsOpen(!isOpen)}
+            >
+              {isOpen ? <X size={20} /> : <Menu size={20} />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Navigation */}
         {isOpen && (
-          <div className="lg:hidden py-4 bg-white border-t">
+          <div className="lg:hidden py-4 bg-white dark:bg-zinc-900 border-t dark:border-zinc-800">
             {navItems.map((item) => (
               <a
                 key={item.name}
                 href={item.href}
                 onClick={() => setIsOpen(false)}
-                className="block py-2 px-4 text-foreground hover:text-school-red hover:bg-gray-50 transition-colors duration-300 cursor-pointer"
+                className="block py-2 px-4 text-foreground hover:text-school-red hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors duration-300 cursor-pointer"
               >
                 {item.name}
               </a>
