@@ -20,16 +20,20 @@ const FluidBackground = () => {
   const mouseRef = useRef({ x: 0, y: 0, px: 0, py: 0, active: false }); 
   const particlesRef = useRef<Particle[]>([]);
 
-  // Define the two main color groups observed in the reference image
-  // Adjusted for higher brightness and saturation to stand out more
-  const colorGroup1 = [
-    [0, 200, 255], // Brighter Cyan
-    [50, 150, 255], // Brighter Blue
+  // EXPANDED COLOR PALETTE: Added more vibrant colors in RGB format
+  const fluidColors = [
+    [0, 200, 255],   // Bright Cyan
+    [50, 150, 255],  // Bright Blue
+    [255, 255, 50],  // Bright Yellow
+    [180, 255, 50],  // Lively Green
+    [255, 100, 100], // Soft Red/Pink
+    [255, 50, 150],  // Magenta/Pink
+    [255, 150, 50],  // Orange
+    [150, 50, 255],  // Purple
   ];
-  const colorGroup2 = [
-    [255, 255, 50],   // Brighter Yellow
-    [180, 255, 50],   // Brighter Greenish Yellow
-  ];
+
+  // A counter to cycle through the fluidColors array
+  let colorCycleIndex = 0;
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -72,12 +76,10 @@ const FluidBackground = () => {
     // Initialize particles across the canvas
     const initParticles = () => {
       particlesRef.current = [];
-      const numInitialParticles = 200; // Increased initial particle count for a denser field
+      const numInitialParticles = 200; // Keep initial count high for a dense field
       for (let i = 0; i < numInitialParticles; i++) {
-        // Randomly assign particles to one of the two color groups
-        const isGroup1 = Math.random() < 0.5;
-        const colors = isGroup1 ? colorGroup1 : colorGroup2;
-        const color = colors[Math.floor(Math.random() * colors.length)];
+        // Pick a random color from the expanded palette for initial particles
+        const color = fluidColors[Math.floor(Math.random() * fluidColors.length)];
 
         particlesRef.current.push({
           x: Math.random() * canvas.width,
@@ -101,9 +103,9 @@ const FluidBackground = () => {
       ctx.fillStyle = 'rgba(0, 0, 0, 0.02)'; // Very low alpha black for subtle trails
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      // Set blend mode to 'screen' or 'lighter' for additive color blending.
-      // 'screen' can work well to blend bright colors on a light background.
-      ctx.globalCompositeOperation = 'screen'; // Changed from 'lighter' to 'screen'
+      // Set blend mode to 'screen' for additive color blending.
+      // 'screen' works well to blend bright colors on a light background.
+      ctx.globalCompositeOperation = 'screen'; 
 
       // If mouse is active, add new "force" particles at the mouse position
       if (mouseRef.current.active) {
@@ -111,9 +113,9 @@ const FluidBackground = () => {
         const mouseVx = mouseRef.current.x - mouseRef.current.px;
         const mouseVy = mouseRef.current.y - mouseRef.current.py;
 
-        // Determine which color group to use based on mouse X position
-        const currentColorGroup = mouseRef.current.x < canvas.width / 2 ? colorGroup1 : colorGroup2;
-        const color = currentColorGroup[Math.floor(Math.random() * currentColorGroup.length)];
+        // Cycle through the expanded color palette for newly emitted particles
+        const color = fluidColors[colorCycleIndex % fluidColors.length];
+        colorCycleIndex = (colorCycleIndex + 1) % fluidColors.length; // Advance the index
 
         // Add multiple smaller particles right at the mouse position
         for (let i = 0; i < 7; i++) { // Increased to 7 particles per frame for denser emission
