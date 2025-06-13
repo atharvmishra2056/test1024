@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
-import { SettingsMenu } from './SettingsMenu'; // Import the new settings menu component
+import { SettingsMenu } from './SettingsMenu';
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -40,7 +40,7 @@ const Navigation = () => {
   ];
 
   return (
-    <nav className={`fixed top-4 md:top-8 left-0 right-0 z-40 transition-all duration-300 ${
+    <nav className={`fixed top-14 md:top-8 left-0 right-0 z-40 transition-all duration-300 ${
       isScrolled ? 'bg-white/95 dark:bg-zinc-900/95 backdrop-blur-md shadow-lg' : 'bg-white/90 dark:bg-zinc-900/80 backdrop-blur-sm'
     } ${isVisible ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'}`}>
       <div className="container mx-auto px-4">
@@ -67,10 +67,8 @@ const Navigation = () => {
           </div>
 
           <div className="flex items-center gap-2">
-            {/* The new settings menu is added here */}
             <SettingsMenu />
             
-            {/* Mobile Menu Button */}
             <button
               className="lg:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-zinc-800 transition-colors"
               onClick={() => setIsOpen(!isOpen)}
