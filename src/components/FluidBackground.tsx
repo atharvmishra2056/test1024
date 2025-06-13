@@ -178,7 +178,7 @@ const FluidBackground = () => {
   return (
     <canvas
       ref={canvasRef}
-      className="absolute inset-0 pointer-events-none opacity-45" // Increased opacity of the canvas
+      className="absolute inset-0 pointer-events-none opacity-40" // Increased opacity of the canvas
     />
   );
 };
