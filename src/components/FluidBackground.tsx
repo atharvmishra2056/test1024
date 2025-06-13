@@ -85,8 +85,8 @@ const FluidBackground = () => {
           const force = (250 - distance) / 250;
           if (distance !== 0) {
             // Increase force for faster following
-            particle.vx += (dx / distance) * force * 0.09;
-            particle.vy += (dy / distance) * force * 0.09;
+            particle.vx += (dx / distance) * force * 0.12;
+            particle.vy += (dy / distance) * force * 0.12;
           }
           particle.hue = (particle.hue + 1) % 360;
         }
@@ -143,7 +143,7 @@ const FluidBackground = () => {
   return (
     <canvas
       ref={canvasRef}
-      className="absolute inset-0 pointer-events-none opacity-40"
+      className="absolute inset-0 pointer-events-none opacity-45"
       aria-hidden="true"
     />
   );
