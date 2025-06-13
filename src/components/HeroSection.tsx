@@ -17,7 +17,15 @@ const HeroSection = () => {
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Video Background */}
       <div className="absolute inset-0">
-        <video className="w-full h-full object-cover" autoPlay muted loop playsInline>
+        <video 
+          className="w-full h-full object-cover" 
+          autoPlay 
+          muted 
+          loop 
+          playsInline
+          preload="auto"
+          priority="high"
+        >
           <source src="https://fortuneworldschool.com/uploads/slider/videos/1740726135_videofws.mp4" type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-gradient-to-r from-school-red/70 to-school-beige/30"></div>
