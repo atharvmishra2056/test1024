@@ -248,7 +248,7 @@ const FluidBackground = () => {
       ref={canvasRef}
       // Overall opacity of the canvas element. This allows the section's background to show through.
       // Adjusted slightly higher to make the effect more prominent.
-      className="absolute inset-0 pointer-events-none opacity-40" // Reduced canvas opacity to 40%
+      className="absolute inset-0 pointer-events-none opacity-35" // Reduced canvas opacity to 40%
       aria-hidden="true"
     />
   );
