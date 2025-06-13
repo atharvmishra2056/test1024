@@ -101,7 +101,11 @@ export default {
 				'float': {
 					'0%, 100%': { transform: 'translateY(0)' },
 					'50%': { transform: 'translateY(-8px)' }
-				}
+				},
+        'progress-bar': {
+          'from': { 'stroke-dashoffset': '100' },
+          'to': { 'stroke-dashoffset': '0' },
+        },
 			},
 			animation: {
 				'fade-in': 'fade-in 0.8s ease-out',
@@ -111,7 +115,8 @@ export default {
 				'scale-in': 'scale-in 0.3s ease-out',
 				'pop-twice': 'pop-twice 1s ease-in-out',
 				'heart-beat': 'heart-beat 1.5s ease-in-out infinite',
-				'float': 'float 3s ease-in-out infinite'
+				'float': 'float 3s ease-in-out infinite',
+        'progress-bar': 'progress-bar 15s linear forwards',
 			},
 			animationDelay: {
 				'200': '200ms',
