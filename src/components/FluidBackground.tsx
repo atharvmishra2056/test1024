@@ -20,7 +20,7 @@ const FluidBackground = () => {
   const mouseRef = useRef({ x: 0, y: 0, px: 0, py: 0, active: false }); 
   const particlesRef = useRef<Particle[]>([]);
 
-  // EXPANDED COLOR PALETTE: Added more vibrant colors in RGB format
+  // EXPANDED COLOR PALETTE: More vibrant colors in RGB format
   const fluidColors = [
     [0, 200, 255],   // Bright Cyan
     [50, 150, 255],  // Bright Blue
@@ -76,7 +76,7 @@ const FluidBackground = () => {
     // Initialize particles across the canvas
     const initParticles = () => {
       particlesRef.current = [];
-      const numInitialParticles = 150; // Reduced initial count slightly to start less dense
+      const numInitialParticles = 150; // Keep initial count for a base field
       for (let i = 0; i < numInitialParticles; i++) {
         // Pick a random color from the expanded palette for initial particles
         const color = fluidColors[Math.floor(Math.random() * fluidColors.length)];
@@ -84,13 +84,13 @@ const FluidBackground = () => {
         particlesRef.current.push({
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
-          vx: (Math.random() - 0.5) * 1.5, // Initial velocity
-          vy: (Math.random() - 0.5) * 1.5,
+          vx: (Math.random() - 0.5) * 1, // Reduced initial velocity
+          vy: (Math.random() - 0.5) * 1,
           ax: 0, // Initial acceleration
           ay: 0,
-          size: Math.random() * 20 + 10, // Smaller base size for initial particles
+          size: Math.random() * 20 + 10, // Base size for initial particles
           color: [...color], // Copy array to avoid direct mutation
-          alpha: 0.1 + Math.random() * 0.05, // Lower initial alpha for subtle start
+          alpha: 0.05 + Math.random() * 0.03, // Significantly lower initial alpha
         });
       }
     };
@@ -100,12 +100,12 @@ const FluidBackground = () => {
       // Clear canvas using 'source-over' with a very faint, almost transparent dark color.
       // This creates subtle trails that don't excessively darken the light background.
       ctx.globalCompositeOperation = 'source-over';
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.035)'; // Adjusted alpha for clearing to reduce 'white glow'
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.035)'; // Keep this for subtle trails
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      // Set blend mode to 'screen' for additive color blending.
-      // 'screen' works well to blend bright colors on a light background.
-      ctx.globalCompositeOperation = 'screen'; 
+      // Set blend mode to 'lighter' for additive color blending, emphasizing colors.
+      // 'lighter' often avoids the "white out" effect better than 'screen' with low alphas.
+      ctx.globalCompositeOperation = 'lighter'; 
 
       // If mouse is active, add new "force" particles at the mouse position
       if (mouseRef.current.active) {
@@ -120,29 +120,30 @@ const FluidBackground = () => {
         // Add multiple smaller particles right at the mouse position
         for (let i = 0; i < 7; i++) { // Increased to 7 particles per frame for denser emission
           particlesRef.current.push({
-            x: mouseRef.current.x + (Math.random() - 0.5) * 20, // Slight random offset
-            y: mouseRef.current.y + (Math.random() - 0.5) * 20,
-            vx: mouseVx * 0.4 + (Math.random() - 0.5) * 4, // More inherited velocity, higher scatter
-            vy: mouseVy * 0.4 + (Math.random() - 0.5) * 4,
+            x: mouseRef.current.x + (Math.random() - 0.5) * 15, // Slight random offset
+            y: mouseRef.current.y + (Math.random() - 0.5) * 15,
+            vx: mouseVx * 0.3 + (Math.random() - 0.5) * 3, // Less inherited velocity, more random scatter
+            vy: mouseVy * 0.3 + (Math.random() - 0.5) * 3,
             ax: 0, ay: 0,
-            size: Math.random() * 25 + 8, // Smaller new particles
+            size: Math.random() * 20 + 5, // Smaller new particles
             color: [...color],
-            alpha: 0.4, // Slightly lower initial alpha for new particles
+            alpha: 0.18, // Reduced initial alpha for new particles to lessen brightness
           });
         }
       } else {
         // When mouse is not active, subtly add new particles to maintain color
-        if (Math.random() < 0.1) { // 10% chance to add a particle per frame when idle
+        // Reduced frequency and alpha to prevent too much accumulation, and to avoid whiteness
+        if (Math.random() < 0.03) { // 3% chance to add a particle per frame when idle
           const randomColor = fluidColors[Math.floor(Math.random() * fluidColors.length)];
           particlesRef.current.push({
             x: Math.random() * canvas.width,
             y: Math.random() * canvas.height,
-            vx: (Math.random() - 0.5) * 0.5, // Very low velocity for idle particles
-            vy: (Math.random() - 0.5) * 0.5,
+            vx: (Math.random() - 0.5) * 0.2, // Very low velocity for idle particles
+            vy: (Math.random() - 0.5) * 0.2,
             ax: 0, ay: 0,
-            size: Math.random() * 15 + 5, // Small size for idle particles
+            size: Math.random() * 8 + 2, // Very small size for idle particles
             color: [...randomColor],
-            alpha: 0.05 + Math.random() * 0.05, // Very low alpha for subtle background color
+            alpha: 0.01 + Math.random() * 0.01, // Extremely low alpha for very subtle background color
           });
         }
       }
@@ -172,20 +173,20 @@ const FluidBackground = () => {
         particle.vy += particle.ay;
 
         // Apply damping (friction) to velocity and acceleration
-        particle.vx *= 0.96; // Adjusted damping for a balance of flow and fade
-        particle.vy *= 0.96;
-        particle.ax *= 0.85; // Dampen acceleration more aggressively for smoother changes
-        particle.ay *= 0.85;
+        particle.vx *= 0.95; // Adjusted damping for a balance of flow and fade
+        particle.vy *= 0.95;
+        particle.ax *= 0.8; // Dampen acceleration more aggressively for smoother changes
+        particle.ay *= 0.8;
 
         // Update position
         particle.x += particle.vx;
         particle.y += particle.vy;
 
         // Reduce alpha over time for fading trails
-        // Particles fade slower if mouse is inactive to leave more color
-        particle.alpha *= mouseRef.current.active ? 0.98 : 0.99; 
+        // Particles fade faster if mouse is active, slower if idle to leave more color
+        particle.alpha *= mouseRef.current.active ? 0.97 : 0.98; // Faster decay when active, slower when idle
 
-        if (particle.alpha < 0.005) { // Remove particles if they become too transparent
+        if (particle.alpha < 0.003) { // Remove particles if they become too transparent
           particlesRef.current.splice(i, 1);
           continue; 
         }
@@ -203,8 +204,8 @@ const FluidBackground = () => {
         );
         
         // Use full alpha for color stop 0 to ensure initial brightness, then fade
-        gradient.addColorStop(0, `rgba(${particle.color[0]}, ${particle.color[1]}, ${particle.color[2]}, ${particle.alpha * 1.0})`); // Full alpha at center
-        gradient.addColorStop(0.5, `rgba(${particle.color[0]}, ${particle.color[1]}, ${particle.color[2]}, ${particle.alpha * 0.6})`); // Fade to 60% alpha
+        gradient.addColorStop(0, `rgba(${particle.color[0]}, ${particle.color[1]}, ${particle.color[2]}, ${particle.alpha * 0.8})`); // Reduced max alpha at center
+        gradient.addColorStop(0.5, `rgba(${particle.color[0]}, ${particle.color[1]}, ${particle.color[2]}, ${particle.alpha * 0.4})`); // Reduced mid alpha
         gradient.addColorStop(1, 'transparent'); // Fully transparent at edge
 
         ctx.fillStyle = gradient;
@@ -247,7 +248,7 @@ const FluidBackground = () => {
       ref={canvasRef}
       // Overall opacity of the canvas element. This allows the section's background to show through.
       // Adjusted slightly higher to make the effect more prominent.
-      className="absolute inset-0 pointer-events-none opacity-50" 
+      className="absolute inset-0 pointer-events-none opacity-40" // Reduced canvas opacity to 40%
       aria-hidden="true"
     />
   );
