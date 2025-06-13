@@ -24,7 +24,6 @@ const HeroSection = () => {
           loop 
           playsInline
           preload="auto"
-          priority="high"
         >
           <source src="https://fortuneworldschool.com/uploads/slider/videos/1740726135_videofws.mp4" type="video/mp4" />
         </video>
@@ -44,9 +43,9 @@ const HeroSection = () => {
         
         <div className="flex justify-center">
           <div className="relative group">
-            {/* Moving glow border animation */}
+            {/* Enhanced glow border animation */}
             <div className="absolute -inset-1 rounded-full overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-school-beige to-transparent animate-border-move rounded-full blur-sm opacity-75"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-school-beige to-transparent animate-border-move rounded-full blur-sm opacity-90"></div>
             </div>
             <button 
               onClick={scrollToAbout} 
