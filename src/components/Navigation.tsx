@@ -45,7 +45,8 @@ const Navigation = () => {
     } ${isVisible ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'}`}>
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-12 md:h-16">
-          <div className="flex items-center">
+          {/* Left-aligned Logo */}
+          <div className="flex-shrink-0">
             <img
               src="https://fortuneworldschool.com/assets/web/images/fw-logo.png"
               alt="Fortune World School official logo with tagline"
@@ -53,32 +54,36 @@ const Navigation = () => {
             />
           </div>
 
-          {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-6">
-            {navItems.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                className="text-foreground hover:text-school-red transition-colors duration-300 font-medium text-sm cursor-pointer"
-              >
-                {item.name}
-              </a>
-            ))}
-          </div>
+          {/* Right-aligned group for navigation and controls */}
+          <div className="flex items-center gap-4">
+            {/* Desktop Navigation Links */}
+            <div className="hidden lg:flex items-center space-x-6">
+              {navItems.map((item) => (
+                <a
+                  key={item.name}
+                  href={item.href}
+                  className="text-foreground hover:text-school-red transition-colors duration-300 font-medium text-sm cursor-pointer"
+                >
+                  {item.name}
+                </a>
+              ))}
+            </div>
 
-          <div className="flex items-center gap-2">
-            <SettingsMenu />
-            
-            <button
-              className="lg:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-zinc-800 transition-colors"
-              onClick={() => setIsOpen(!isOpen)}
-            >
-              {isOpen ? <X size={20} /> : <Menu size={20} />}
-            </button>
+            {/* Settings Menu and Mobile Hamburger Button */}
+            <div className="flex items-center gap-2">
+              <SettingsMenu />
+              
+              <button
+                className="lg:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-zinc-800 transition-colors"
+                onClick={() => setIsOpen(!isOpen)}
+              >
+                {isOpen ? <X size={20} /> : <Menu size={20} />}
+              </button>
+            </div>
           </div>
         </div>
 
-        {/* Mobile Navigation */}
+        {/* Mobile Navigation Dropdown */}
         {isOpen && (
           <div className="lg:hidden py-4 bg-white dark:bg-zinc-900 border-t dark:border-zinc-800">
             {navItems.map((item) => (
