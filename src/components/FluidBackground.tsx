@@ -3,27 +3,17 @@ import React, { useEffect, useRef } from 'react';
 const FluidBackground = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationRef = useRef<number>();
-  const mouseRef = useRef({ x: 0, y: 0, active: false }); // Added 'active' to track if mouse is moving
+  const mouseRef = useRef({ x: 0, y: 0 });
   const particlesRef = useRef<Array<{
     x: number;
     y: number;
     vx: number;
     vy: number;
     size: number;
-    hue: number;
+    // Changed to specific color components instead of hue for more control
+    color: [number, number, number]; // RGB values
     alpha: number;
-    life: number; // Added lifespan property
-    maxLife: number; // Added max life for fading
   }>>([]);
-  
-  // A color palette for the fluid effect, focusing on blue/cyan and yellow/green
-  const fluidColors = [
-    { h: 180, s: 100, l: 50 }, // Cyan
-    { h: 220, s: 100, l: 50 }, // Blue
-    { h: 60, s: 100, l: 50 },  // Yellow
-    { h: 100, s: 100, l: 40 }, // Green
-  ];
-  let colorIndex = 0;
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -32,118 +22,112 @@ const FluidBackground = () => {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
+    // Set canvas size to parent element's size
     const resizeCanvas = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      // Re-initialize particles to adapt to new canvas size
-      initParticles(true); 
-    };
-
-    const handleMouseMove = (e: MouseEvent) => {
-      mouseRef.current.x = e.clientX;
-      mouseRef.current.y = e.clientY;
-      mouseRef.current.active = true;
-    };
-
-    const handleMouseLeave = () => {
-      mouseRef.current.active = false;
-    };
-
-    const initParticles = (clearOnly = false) => {
-      if (clearOnly) {
-        particlesRef.current = [];
-        return;
+      const parent = canvas.parentElement;
+      if (parent) {
+        const rect = parent.getBoundingClientRect();
+        canvas.width = rect.width;
+        canvas.height = rect.height;
       }
-      particlesRef.current = []; 
     };
 
-    const addParticle = (x: number, y: number) => {
-      const color = fluidColors[colorIndex % fluidColors.length];
-      colorIndex++;
+    // Track mouse position globally (even outside canvas)
+    const handleMouseMove = (e: MouseEvent) => {
+      const parent = canvas.parentElement;
+      if (parent) {
+        const rect = parent.getBoundingClientRect();
+        mouseRef.current = {
+          x: e.clientX - rect.left,
+          y: e.clientY - rect.top
+        };
+      } else {
+        mouseRef.current = { x: e.clientX, y: e.clientY };
+      }
+    };
 
-      for (let i = 0; i < 3; i++) { // Add multiple smaller particles per mouse move
-        const speed = Math.random() * 6 + 3; // Increased initial speed for more dynamic flow
-        const angle = Math.random() * Math.PI * 2; // Random direction
-        const maxLife = Math.random() * 80 + 120; // Increased particle lifespan for longer trails
+    // If mouse leaves the window, let the bubbles follow the last known direction
+    const handleMouseLeave = () => {
+      const parent = canvas.parentElement;
+      if (parent) {
+        const rect = parent.getBoundingClientRect();
+        mouseRef.current = {
+          x: rect.width / 2,
+          y: rect.height / 2
+        };
+      }
+    };
+
+    const initParticles = () => {
+      particlesRef.current = [];
+      // Use two sets of particles for the two main colors (blue/cyan and yellow/green)
+      const numParticles = 50; // Increased particle count for denser effect
+      for (let i = 0; i < numParticles; i++) {
+        const isBlueGreen = Math.random() < 0.5; // Randomly assign blue-green or yellow-green
         particlesRef.current.push({
-          x: x + (Math.random() - 0.5) * 20, // Slight random offset
-          y: y + (Math.random() - 0.5) * 20,
-          vx: Math.cos(angle) * speed,
-          vy: Math.sin(angle) * speed,
-          size: Math.random() * 25 + 40, // Slightly larger particles for better fluid appearance
-          hue: color.h + (Math.random() - 0.5) * 40, // Wider hue variation around the base color
-          alpha: 0.9, // Start with high alpha
-          life: maxLife,
-          maxLife: maxLife,
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          vx: (Math.random() - 0.5) * 1, // Slightly higher initial velocity
+          vy: (Math.random() - 0.5) * 1,
+          size: Math.random() * 150 + 80, // Larger, softer blobs
+          color: isBlueGreen ? [0, Math.floor(Math.random() * 100) + 155, Math.floor(Math.random() * 100) + 155] : // Blue-ish to Cyan-ish (e.g., RGB 0,155-255,155-255)
+                   [Math.floor(Math.random() * 100) + 155, Math.floor(Math.random() * 100) + 155, 0], // Yellow-ish to Green-ish (e.g., RGB 155-255,155-255,0)
+          alpha: 0.2 + Math.random() * 0.1 // Slightly higher alpha for more visible overlay
         });
       }
     };
 
     const animate = () => {
-      // Create subtle trails without darkening the background
-      // Use a very low alpha white to gently smudge the canvas, maintaining the underlying light background.
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.03)'; // Very low alpha white fill for subtle trails
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      // Keep background dark/transparent, let the blend create the color
+      ctx.clearRect(0, 0, canvas.width, canvas.height); 
 
-      // This is crucial for the fluid blending effect, making colors add up and glow
-      ctx.globalCompositeOperation = 'lighter'; 
+      // Use a blend mode for fluid effect
+      ctx.globalCompositeOperation = 'lighter'; // or 'overlay', 'screen'
 
-      if (mouseRef.current.active) {
-        addParticle(mouseRef.current.x, mouseRef.current.y);
-      }
-
-      for (let i = particlesRef.current.length - 1; i >= 0; i--) {
-        const particle = particlesRef.current[i];
-
-        // Stronger pull towards the mouse for direct following
+      particlesRef.current.forEach((particle) => {
+        // Mouse influence - stronger pull
         const dx = mouseRef.current.x - particle.x;
         const dy = mouseRef.current.y - particle.y;
         const distance = Math.sqrt(dx * dx + dy * dy);
-        
-        if (mouseRef.current.active && distance > 1) {
-          const pullForce = 0.07; // Increased pull force
-          particle.vx += (dx / distance) * pullForce;
-          particle.vy += (dy / distance) * pullForce;
+
+        if (distance < 300) { // Increased interaction radius
+          const force = (300 - distance) / 300;
+          if (distance !== 0) {
+            particle.vx += (dx / distance) * force * 0.2; // Stronger force
+            particle.vy += (dy / distance) * force * 0.2;
+          }
         }
 
+        // Update position
         particle.x += particle.vx;
         particle.y += particle.vy;
-        particle.life--; 
 
-        // Fade out particle based on remaining life
-        particle.alpha = (particle.life / particle.maxLife) * 0.9; 
-        if (particle.alpha < 0) particle.alpha = 0;
-
-        // Damping for smooth movement
-        particle.vx *= 0.95; 
+        // Damping for smoothing, slightly less damping for more flow
+        particle.vx *= 0.95;
         particle.vy *= 0.95;
-        
-        // Remove dead particles or particles that are too far off-screen
-        if (particle.life < 0 || 
-            particle.x < -particle.size * 2 || particle.x > canvas.width + particle.size * 2 ||
-            particle.y < -particle.size * 2 || particle.y > canvas.height + particle.size * 2) {
-          particlesRef.current.splice(i, 1);
-          continue; 
-        }
 
-        // Draw particle with radial gradient for the fluid effect
+        // Boundaries - wrap around instead of bounce for continuous flow
+        if (particle.x < -particle.size) particle.x = canvas.width + particle.size;
+        if (particle.x > canvas.width + particle.size) particle.x = -particle.size;
+        if (particle.y < -particle.size) particle.y = canvas.height + particle.size;
+        if (particle.y > canvas.height + particle.size) particle.y = -particle.size;
+
+        // Draw particle with radial gradient
         const gradient = ctx.createRadialGradient(
           particle.x, particle.y, 0,
           particle.x, particle.y, particle.size
         );
-        
-        const currentAlpha = particle.alpha;
-        gradient.addColorStop(0, `hsla(${particle.hue}, 100%, 75%, ${currentAlpha})`);
-        gradient.addColorStop(0.5, `hsla(${particle.hue + 30}, 90%, 65%, ${currentAlpha * 0.7})`); 
+        gradient.addColorStop(0, `rgba(${particle.color[0]}, ${particle.color[1]}, ${particle.color[2]}, ${particle.alpha})`);
+        gradient.addColorStop(0.7, `rgba(${particle.color[0]}, ${particle.color[1]}, ${particle.color[2]}, ${particle.alpha * 0.5})`);
         gradient.addColorStop(1, 'transparent');
 
         ctx.fillStyle = gradient;
         ctx.beginPath();
         ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
         ctx.fill();
-      }
-
-      // Reset globalCompositeOperation after drawing particles
+      });
+      
+      // Reset globalCompositeOperation after drawing particles to avoid affecting other elements
       ctx.globalCompositeOperation = 'source-over';
 
       animationRef.current = requestAnimationFrame(animate);
@@ -155,7 +139,7 @@ const FluidBackground = () => {
 
     window.addEventListener('resize', resizeCanvas);
     window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('mouseleave', handleMouseLeave); 
+    window.addEventListener('mouseleave', handleMouseLeave);
 
     return () => {
       window.removeEventListener('resize', resizeCanvas);
@@ -170,9 +154,8 @@ const FluidBackground = () => {
   return (
     <canvas
       ref={canvasRef}
-      // Reduced opacity of the canvas element to blend better with the light background.
-      // This allows the underlying section's gradient to remain prominent.
-      className="absolute inset-0 pointer-events-none opacity-25" 
+      // Reduced opacity to allow the school beige background to show through more, matching original intention
+      className="absolute inset-0 pointer-events-none opacity-30" 
       aria-hidden="true"
     />
   );
