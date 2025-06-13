@@ -10,7 +10,8 @@ const FluidBackground = () => {
     vx: number;
     vy: number;
     size: number;
-    hue: number;
+    // Changed to specific color components instead of hue for more control
+    color: [number, number, number]; // RGB values
     alpha: number;
   }>>([]);
 
@@ -59,58 +60,65 @@ const FluidBackground = () => {
 
     const initParticles = () => {
       particlesRef.current = [];
-      for (let i = 0; i < 40; i++) { // Increased bubble count for more effect
+      // Use two sets of particles for the two main colors (blue/cyan and yellow/green)
+      const numParticles = 50; // Increased particle count for denser effect
+      for (let i = 0; i < numParticles; i++) {
+        const isBlueGreen = Math.random() < 0.5; // Randomly assign blue-green or yellow-green
         particlesRef.current.push({
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
-          vx: (Math.random() - 0.5) * 0.7, // Slightly more initial velocity
-          vy: (Math.random() - 0.5) * 0.7,
-          size: Math.random() * 120 + 60, // Larger, softer blobs
-          hue: Math.random() * 360, // Full hue range for smoky color
-          alpha: 0.25 + Math.random() * 0.13 // Slightly higher alpha for smoky overlay
+          vx: (Math.random() - 0.5) * 1, // Slightly higher initial velocity
+          vy: (Math.random() - 0.5) * 1,
+          size: Math.random() * 150 + 80, // Larger, softer blobs
+          color: isBlueGreen ? [0, Math.floor(Math.random() * 100) + 155, Math.floor(Math.random() * 100) + 155] : // Blue-ish to Cyan-ish (e.g., RGB 0,155-255,155-255)
+                   [Math.floor(Math.random() * 100) + 155, Math.floor(Math.random() * 100) + 155, 0], // Yellow-ish to Green-ish (e.g., RGB 155-255,155-255,0)
+          alpha: 0.2 + Math.random() * 0.1 // Slightly higher alpha for more visible overlay
         });
       }
     };
 
     const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      // Keep background dark/transparent, let the blend create the color
+      ctx.clearRect(0, 0, canvas.width, canvas.height); 
+
+      // Use a blend mode for fluid effect
+      ctx.globalCompositeOperation = 'lighter'; // or 'overlay', 'screen'
 
       particlesRef.current.forEach((particle) => {
-        // Mouse influence
+        // Mouse influence - stronger pull
         const dx = mouseRef.current.x - particle.x;
         const dy = mouseRef.current.y - particle.y;
         const distance = Math.sqrt(dx * dx + dy * dy);
 
-        if (distance < 250) {
-          const force = (250 - distance) / 250;
+        if (distance < 300) { // Increased interaction radius
+          const force = (300 - distance) / 300;
           if (distance !== 0) {
-            // Increase force for faster following
-            particle.vx += (dx / distance) * force * 0.12;
-            particle.vy += (dy / distance) * force * 0.12;
+            particle.vx += (dx / distance) * force * 0.2; // Stronger force
+            particle.vy += (dy / distance) * force * 0.2;
           }
-          particle.hue = (particle.hue + 1) % 360;
         }
 
         // Update position
         particle.x += particle.vx;
         particle.y += particle.vy;
 
-        // Damping for smoothing
-        particle.vx *= 0.96;
-        particle.vy *= 0.96;
+        // Damping for smoothing, slightly less damping for more flow
+        particle.vx *= 0.95;
+        particle.vy *= 0.95;
 
-        // Boundaries
-        if (particle.x < 0 || particle.x > canvas.width) particle.vx *= -1;
-        if (particle.y < 0 || particle.y > canvas.height) particle.vy *= -1;
+        // Boundaries - wrap around instead of bounce for continuous flow
+        if (particle.x < -particle.size) particle.x = canvas.width + particle.size;
+        if (particle.x > canvas.width + particle.size) particle.x = -particle.size;
+        if (particle.y < -particle.size) particle.y = canvas.height + particle.size;
+        if (particle.y > canvas.height + particle.size) particle.y = -particle.size;
 
-        // Create complex smoky gradient
+        // Draw particle with radial gradient
         const gradient = ctx.createRadialGradient(
           particle.x, particle.y, 0,
           particle.x, particle.y, particle.size
         );
-        gradient.addColorStop(0, `hsla(${particle.hue}, 80%, 70%, ${particle.alpha})`);
-        gradient.addColorStop(0.3, `hsla(${(particle.hue + 40) % 360}, 50%, 80%, ${particle.alpha * 0.7})`);
-        gradient.addColorStop(0.7, `hsla(${(particle.hue + 80) % 360}, 70%, 60%, ${particle.alpha * 0.5})`);
+        gradient.addColorStop(0, `rgba(${particle.color[0]}, ${particle.color[1]}, ${particle.color[2]}, ${particle.alpha})`);
+        gradient.addColorStop(0.7, `rgba(${particle.color[0]}, ${particle.color[1]}, ${particle.color[2]}, ${particle.alpha * 0.5})`);
         gradient.addColorStop(1, 'transparent');
 
         ctx.fillStyle = gradient;
@@ -118,6 +126,9 @@ const FluidBackground = () => {
         ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
         ctx.fill();
       });
+      
+      // Reset globalCompositeOperation after drawing particles to avoid affecting other elements
+      ctx.globalCompositeOperation = 'source-over';
 
       animationRef.current = requestAnimationFrame(animate);
     };
@@ -143,7 +154,8 @@ const FluidBackground = () => {
   return (
     <canvas
       ref={canvasRef}
-      className="absolute inset-0 pointer-events-none opacity-45"
+      // Reduced opacity to allow the school beige background to show through more, matching original intention
+      className="absolute inset-0 pointer-events-none opacity-30" 
       aria-hidden="true"
     />
   );
