@@ -14,7 +14,11 @@ const queryClient = new QueryClient();
 const App = () => (
   <QueryClientProvider client={queryClient}>
     {/* Provides theme switching (light/dark) functionality */}
-    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+    <ThemeProvider
+      attribute="class"
+      defaultTheme="light"
+      enableSystem={false}
+    >
       {/* Provides app-specific settings like cursor and modal states */}
       <AppSettingsProvider>
         <TooltipProvider>
