@@ -81,33 +81,36 @@ const CursorFollower = () => {
 
   return (
     <>
-      {/* Main cursor with soft pinkish glow */}
+      {/* Main cursor with enhanced soft pinkish glow */}
       <div
         ref={mainCursorRef}
         className="fixed pointer-events-none z-[9999] transition-transform duration-100 ease-out"
         style={{ willChange: 'transform' }}
       >
         <div className="relative">
-          {/* Outer glow */}
-          <div className="absolute -inset-2 bg-gradient-to-r from-pink-300/40 via-pink-400/50 to-pink-300/40 rounded-full blur-md animate-pulse"></div>
+          {/* Enhanced outer glow - more visible */}
+          <div className="absolute -inset-4 bg-gradient-to-r from-pink-400/60 via-pink-300/80 to-pink-400/60 rounded-full blur-lg animate-pulse"></div>
+          {/* Middle glow */}
+          <div className="absolute -inset-2 bg-pink-300/70 rounded-full blur-md"></div>
           {/* Inner glow */}
-          <div className="absolute -inset-1 bg-pink-400/60 rounded-full blur-sm"></div>
+          <div className="absolute -inset-1 bg-pink-400/80 rounded-full blur-sm"></div>
           {/* Core */}
-          <div className="w-5 h-5 bg-gradient-to-br from-pink-300 to-pink-500 rounded-full shadow-lg"></div>
+          <div className="w-4 h-4 bg-gradient-to-br from-pink-200 to-pink-400 rounded-full shadow-lg"></div>
         </div>
       </div>
 
-      {/* Trail cursor - follows with delay */}
+      {/* Trail cursor - follows with delay and enhanced glow */}
       <div
         ref={trailCursorRef}
         className="fixed pointer-events-none z-[9998]"
         style={{ willChange: 'transform' }}
       >
         <div className="relative">
-          {/* Trail glow */}
-          <div className="absolute -inset-1 bg-pink-300/30 rounded-full blur-sm"></div>
+          {/* Enhanced trail glow */}
+          <div className="absolute -inset-3 bg-pink-300/50 rounded-full blur-md"></div>
+          <div className="absolute -inset-1 bg-pink-400/60 rounded-full blur-sm"></div>
           {/* Trail core */}
-          <div className="w-3 h-3 bg-pink-400/70 rounded-full"></div>
+          <div className="w-3 h-3 bg-pink-300/80 rounded-full"></div>
         </div>
       </div>
 
