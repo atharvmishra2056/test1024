@@ -47,7 +47,6 @@ const FluidBackground = () => {
 
     // If mouse leaves the window, let the bubbles follow the last known direction
     const handleMouseLeave = () => {
-      // Optionally, you can set the mouse to the center of the canvas
       const parent = canvas.parentElement;
       if (parent) {
         const rect = parent.getBoundingClientRect();
@@ -60,15 +59,15 @@ const FluidBackground = () => {
 
     const initParticles = () => {
       particlesRef.current = [];
-      for (let i = 0; i < 15; i++) {
+      for (let i = 0; i < 40; i++) { // Increased bubble count for more effect
         particlesRef.current.push({
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
-          vx: (Math.random() - 0.5) * 0.5,
-          vy: (Math.random() - 0.5) * 0.5,
-          size: Math.random() * 100 + 50,
-          hue: Math.random() * 60 + 280, // Purple to pink range
-          alpha: 0.1 + Math.random() * 0.1
+          vx: (Math.random() - 0.5) * 0.7, // Slightly more initial velocity
+          vy: (Math.random() - 0.5) * 0.7,
+          size: Math.random() * 120 + 60, // Larger, softer blobs
+          hue: Math.random() * 360, // Full hue range for smoky color
+          alpha: 0.25 + Math.random() * 0.13 // Slightly higher alpha for smoky overlay
         });
       }
     };
@@ -77,16 +76,17 @@ const FluidBackground = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       particlesRef.current.forEach((particle) => {
-        // Mouse influence is always active
+        // Mouse influence
         const dx = mouseRef.current.x - particle.x;
         const dy = mouseRef.current.y - particle.y;
         const distance = Math.sqrt(dx * dx + dy * dy);
 
-        if (distance < 200) {
-          const force = (200 - distance) / 200;
+        if (distance < 250) {
+          const force = (250 - distance) / 250;
           if (distance !== 0) {
-            particle.vx += (dx / distance) * force * 0.01;
-            particle.vy += (dy / distance) * force * 0.01;
+            // Increase force for faster following
+            particle.vx += (dx / distance) * force * 0.09;
+            particle.vy += (dy / distance) * force * 0.09;
           }
           particle.hue = (particle.hue + 1) % 360;
         }
@@ -95,21 +95,22 @@ const FluidBackground = () => {
         particle.x += particle.vx;
         particle.y += particle.vy;
 
-        // Damping
-        particle.vx *= 0.98;
-        particle.vy *= 0.98;
+        // Damping for smoothing
+        particle.vx *= 0.96;
+        particle.vy *= 0.96;
 
         // Boundaries
         if (particle.x < 0 || particle.x > canvas.width) particle.vx *= -1;
         if (particle.y < 0 || particle.y > canvas.height) particle.vy *= -1;
 
-        // Create gradient
+        // Create complex smoky gradient
         const gradient = ctx.createRadialGradient(
           particle.x, particle.y, 0,
           particle.x, particle.y, particle.size
         );
-        gradient.addColorStop(0, `hsla(${particle.hue}, 70%, 60%, ${particle.alpha})`);
-        gradient.addColorStop(0.5, `hsla(${particle.hue + 20}, 60%, 50%, ${particle.alpha * 0.5})`);
+        gradient.addColorStop(0, `hsla(${particle.hue}, 80%, 70%, ${particle.alpha})`);
+        gradient.addColorStop(0.3, `hsla(${(particle.hue + 40) % 360}, 50%, 80%, ${particle.alpha * 0.7})`);
+        gradient.addColorStop(0.7, `hsla(${(particle.hue + 80) % 360}, 70%, 60%, ${particle.alpha * 0.5})`);
         gradient.addColorStop(1, 'transparent');
 
         ctx.fillStyle = gradient;
@@ -142,7 +143,7 @@ const FluidBackground = () => {
   return (
     <canvas
       ref={canvasRef}
-      className="absolute inset-0 pointer-events-none opacity-30"
+      className="absolute inset-0 pointer-events-none opacity-40"
       aria-hidden="true"
     />
   );
