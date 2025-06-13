@@ -1,4 +1,3 @@
-
 import React from 'react';
 import DisclaimerHeader from '../components/DisclaimerHeader';
 import Navigation from '../components/Navigation';
@@ -20,6 +19,7 @@ import LikeButton from '../components/LikeButton';
 import PrincipalMessageModal from '../components/PrincipalMessageModal';
 import AdmissionAlert from '../components/AdmissionAlert';
 import CursorFollower from '../components/CursorFollower';
+import UpdateNotification from '../components/UpdateNotification'; // Import the new component
 
 const Index = () => {
   return (
@@ -47,6 +47,7 @@ const Index = () => {
       <PrincipalMessageModal />
       <AdmissionAlert />
       <CursorFollower />
+      <UpdateNotification /> {/* Add the new component here */}
     </div>
   );
 };
