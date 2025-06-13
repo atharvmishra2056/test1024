@@ -32,7 +32,7 @@ const FluidBackground = () => {
     [150, 50, 255],  // Purple
   ];
 
-  // A counter to cycle through the fluidColors array
+  // A counter to cycle through the fluidColors array for mouse-driven particles
   let colorCycleIndex = 0;
 
   useEffect(() => {
@@ -76,7 +76,7 @@ const FluidBackground = () => {
     // Initialize particles across the canvas
     const initParticles = () => {
       particlesRef.current = [];
-      const numInitialParticles = 200; // Keep initial count high for a dense field
+      const numInitialParticles = 150; // Reduced initial count slightly to start less dense
       for (let i = 0; i < numInitialParticles; i++) {
         // Pick a random color from the expanded palette for initial particles
         const color = fluidColors[Math.floor(Math.random() * fluidColors.length)];
@@ -84,13 +84,13 @@ const FluidBackground = () => {
         particlesRef.current.push({
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
-          vx: (Math.random() - 0.5) * 2, // Higher initial velocity for more motion
-          vy: (Math.random() - 0.5) * 2,
+          vx: (Math.random() - 0.5) * 1.5, // Initial velocity
+          vy: (Math.random() - 0.5) * 1.5,
           ax: 0, // Initial acceleration
           ay: 0,
-          size: Math.random() * 25 + 15, // Slightly larger base size for better visibility
+          size: Math.random() * 20 + 10, // Smaller base size for initial particles
           color: [...color], // Copy array to avoid direct mutation
-          alpha: 0.15 + Math.random() * 0.08, // Higher initial alpha for more visible particles
+          alpha: 0.1 + Math.random() * 0.05, // Lower initial alpha for subtle start
         });
       }
     };
@@ -100,7 +100,7 @@ const FluidBackground = () => {
       // Clear canvas using 'source-over' with a very faint, almost transparent dark color.
       // This creates subtle trails that don't excessively darken the light background.
       ctx.globalCompositeOperation = 'source-over';
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.02)'; // Very low alpha black for subtle trails
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.035)'; // Adjusted alpha for clearing to reduce 'white glow'
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       // Set blend mode to 'screen' for additive color blending.
@@ -127,7 +127,22 @@ const FluidBackground = () => {
             ax: 0, ay: 0,
             size: Math.random() * 25 + 8, // Smaller new particles
             color: [...color],
-            alpha: 0.5, // Higher initial alpha for new particles to be more visible
+            alpha: 0.4, // Slightly lower initial alpha for new particles
+          });
+        }
+      } else {
+        // When mouse is not active, subtly add new particles to maintain color
+        if (Math.random() < 0.1) { // 10% chance to add a particle per frame when idle
+          const randomColor = fluidColors[Math.floor(Math.random() * fluidColors.length)];
+          particlesRef.current.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            vx: (Math.random() - 0.5) * 0.5, // Very low velocity for idle particles
+            vy: (Math.random() - 0.5) * 0.5,
+            ax: 0, ay: 0,
+            size: Math.random() * 15 + 5, // Small size for idle particles
+            color: [...randomColor],
+            alpha: 0.05 + Math.random() * 0.05, // Very low alpha for subtle background color
           });
         }
       }
@@ -167,7 +182,9 @@ const FluidBackground = () => {
         particle.y += particle.vy;
 
         // Reduce alpha over time for fading trails
-        particle.alpha *= 0.98; // Faster alpha decay for more dynamic, less persistent small particles
+        // Particles fade slower if mouse is inactive to leave more color
+        particle.alpha *= mouseRef.current.active ? 0.98 : 0.99; 
+
         if (particle.alpha < 0.005) { // Remove particles if they become too transparent
           particlesRef.current.splice(i, 1);
           continue; 
