@@ -18,15 +18,18 @@ import BackToTop from '../components/BackToTop';
 import LikeButton from '../components/LikeButton';
 import PrincipalMessageModal from '../components/PrincipalMessageModal';
 import AdmissionAlert from '../components/AdmissionAlert';
-import CursorFollower from '../components/CursorFollower';
-import UpdateNotification from '../components/UpdateNotification'; // Import the new component
+import UpdateNotification from '../components/UpdateNotification';
+import UpdateChangelogModal from '../components/UpdateChangelogModal';
+import { useAppSettings } from '../contexts/AppSettingsContext';
 
 const Index = () => {
+  // Get modal state and setter from the global context
+  const { isChangelogModalOpen, setIsChangelogModalOpen } = useAppSettings();
+
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background dark:bg-zinc-900">
       <DisclaimerHeader />
       <Navigation />
-      {/* Reduced gap between headers and adjusted for new positioning */}
       <div className="pt-12 md:pt-16 lg:pt-20">
         <HeroSection />
         <AboutSection />
@@ -46,8 +49,9 @@ const Index = () => {
       <LikeButton />
       <PrincipalMessageModal />
       <AdmissionAlert />
-      <CursorFollower />
-      <UpdateNotification /> {/* Add the new component here */}
+      <UpdateNotification />
+      {/* The Changelog Modal is rendered here, controlled by the global state */}
+      <UpdateChangelogModal isOpen={isChangelogModalOpen} onOpenChange={setIsChangelogModalOpen} />
     </div>
   );
 };
