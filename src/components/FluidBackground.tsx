@@ -1,10 +1,9 @@
-// src/components/FluidBackground.tsx
 import React, { useEffect, useRef } from 'react';
 
 const FluidBackground = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationRef = useRef<number>();
-  const mouseRef = useRef({ x: 0, y: 0, active: false });
+  const mouseRef = useRef({ x: 0, y: 0 });
   const particlesRef = useRef<Array<{
     x: number;
     y: number;
@@ -13,17 +12,7 @@ const FluidBackground = () => {
     size: number;
     hue: number;
     alpha: number;
-    life: number;
-    maxLife: number;
   }>>([]);
-
-  const fluidColors = [
-    { h: 180, s: 100, l: 50 }, // Cyan
-    { h: 240, s: 100, l: 50 }, // Blue
-    { h: 60, s: 100, l: 50 },  // Yellow
-    { h: 300, s: 100, l: 50 }, // Magenta
-  ];
-  let colorIndex = 0;
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -32,109 +21,103 @@ const FluidBackground = () => {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    // Make the canvas always fill its parent
+    // Set canvas size to parent element's size
     const resizeCanvas = () => {
       const parent = canvas.parentElement;
       if (parent) {
         const rect = parent.getBoundingClientRect();
         canvas.width = rect.width;
         canvas.height = rect.height;
-      } else {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
       }
-      initParticles(true);
     };
 
+    // Track mouse position globally (even outside canvas)
     const handleMouseMove = (e: MouseEvent) => {
-      const bounds = canvas.getBoundingClientRect();
-      mouseRef.current.x = e.clientX - bounds.left;
-      mouseRef.current.y = e.clientY - bounds.top;
-      mouseRef.current.active = true;
+      const parent = canvas.parentElement;
+      if (parent) {
+        const rect = parent.getBoundingClientRect();
+        mouseRef.current = {
+          x: e.clientX - rect.left,
+          y: e.clientY - rect.top
+        };
+      } else {
+        mouseRef.current = { x: e.clientX, y: e.clientY };
+      }
     };
 
+    // If mouse leaves the window, let the bubbles follow the last known direction
     const handleMouseLeave = () => {
-      mouseRef.current.active = false;
+      const parent = canvas.parentElement;
+      if (parent) {
+        const rect = parent.getBoundingClientRect();
+        mouseRef.current = {
+          x: rect.width / 2,
+          y: rect.height / 2
+        };
+      }
     };
 
-    const initParticles = (clearOnly = false) => {
+    const initParticles = () => {
       particlesRef.current = [];
-    };
-
-    const addParticle = (x: number, y: number) => {
-      const color = fluidColors[colorIndex % fluidColors.length];
-      colorIndex++;
-      for (let i = 0; i < 3; i++) {
-        const speed = Math.random() * 5 + 2;
-        const angle = Math.random() * Math.PI * 2;
-        const maxLife = Math.random() * 60 + 100;
+      for (let i = 0; i < 40; i++) { // Increased bubble count for more effect
         particlesRef.current.push({
-          x: x + (Math.random() - 0.5) * 10,
-          y: y + (Math.random() - 0.5) * 10,
-          vx: Math.cos(angle) * speed,
-          vy: Math.sin(angle) * speed,
-          size: Math.random() * 20 + 30,
-          hue: color.h + (Math.random() - 0.5) * 30,
-          alpha: 0.8,
-          life: maxLife,
-          maxLife: maxLife,
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          vx: (Math.random() - 0.5) * 0.7, // Slightly more initial velocity
+          vy: (Math.random() - 0.5) * 0.7,
+          size: Math.random() * 120 + 60, // Larger, softer blobs
+          hue: Math.random() * 360, // Full hue range for smoky color
+          alpha: 0.25 + Math.random() * 0.13 // Slightly higher alpha for smoky overlay
         });
       }
     };
 
     const animate = () => {
-      // Beige background for trails
-      ctx.fillStyle = 'rgba(245, 245, 220, 0.18)';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      if (mouseRef.current.active) {
-        addParticle(mouseRef.current.x, mouseRef.current.y);
-      }
-
-      for (let i = particlesRef.current.length - 1; i >= 0; i--) {
-        const particle = particlesRef.current[i];
+      particlesRef.current.forEach((particle) => {
+        // Mouse influence
         const dx = mouseRef.current.x - particle.x;
         const dy = mouseRef.current.y - particle.y;
         const distance = Math.sqrt(dx * dx + dy * dy);
 
-        if (mouseRef.current.active && distance > 1) {
-          const pullForce = 0.05;
-          particle.vx += (dx / distance) * pullForce;
-          particle.vy += (dy / distance) * pullForce;
+        if (distance < 250) {
+          const force = (250 - distance) / 250;
+          if (distance !== 0) {
+            // Increase force for faster following
+            particle.vx += (dx / distance) * force * 0.12;
+            particle.vy += (dy / distance) * force * 0.12;
+          }
+          particle.hue = (particle.hue + 1) % 360;
         }
 
-        particle.vx *= 0.96;
-        particle.vy *= 0.96;
+        // Update position
         particle.x += particle.vx;
         particle.y += particle.vy;
-        particle.life--;
 
-        particle.alpha = (particle.life / particle.maxLife) * 0.8;
-        if (particle.alpha < 0) particle.alpha = 0;
+        // Damping for smoothing
+        particle.vx *= 0.96;
+        particle.vy *= 0.96;
 
-        if (
-          particle.life < 0 ||
-          particle.x < -particle.size || particle.x > canvas.width + particle.size ||
-          particle.y < -particle.size || particle.y > canvas.height + particle.size
-        ) {
-          particlesRef.current.splice(i, 1);
-          continue;
-        }
+        // Boundaries
+        if (particle.x < 0 || particle.x > canvas.width) particle.vx *= -1;
+        if (particle.y < 0 || particle.y > canvas.height) particle.vy *= -1;
 
+        // Create complex smoky gradient
         const gradient = ctx.createRadialGradient(
           particle.x, particle.y, 0,
           particle.x, particle.y, particle.size
         );
-        const alphaFade = particle.alpha;
-        gradient.addColorStop(0, `hsla(${particle.hue}, 100%, 70%, ${alphaFade})`);
-        gradient.addColorStop(0.5, `hsla(${particle.hue + 30}, 90%, 60%, ${alphaFade * 0.6})`);
+        gradient.addColorStop(0, `hsla(${particle.hue}, 80%, 70%, ${particle.alpha})`);
+        gradient.addColorStop(0.3, `hsla(${(particle.hue + 40) % 360}, 50%, 80%, ${particle.alpha * 0.7})`);
+        gradient.addColorStop(0.7, `hsla(${(particle.hue + 80) % 360}, 70%, 60%, ${particle.alpha * 0.5})`);
         gradient.addColorStop(1, 'transparent');
 
         ctx.fillStyle = gradient;
         ctx.beginPath();
         ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
         ctx.fill();
-      }
+      });
 
       animationRef.current = requestAnimationFrame(animate);
     };
@@ -144,13 +127,13 @@ const FluidBackground = () => {
     animate();
 
     window.addEventListener('resize', resizeCanvas);
-    canvas.addEventListener('mousemove', handleMouseMove);
-    canvas.addEventListener('mouseleave', handleMouseLeave);
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mouseleave', handleMouseLeave);
 
     return () => {
       window.removeEventListener('resize', resizeCanvas);
-      canvas.removeEventListener('mousemove', handleMouseMove);
-      canvas.removeEventListener('mouseleave', handleMouseLeave);
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseleave', handleMouseLeave);
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);
       }
@@ -160,8 +143,8 @@ const FluidBackground = () => {
   return (
     <canvas
       ref={canvasRef}
-      className="absolute inset-0 pointer-events-none opacity-40"
-      style={{ zIndex: 0 }}
+      className="absolute inset-0 pointer-events-none opacity-45"
+      aria-hidden="true"
     />
   );
 };
