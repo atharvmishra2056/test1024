@@ -11,6 +11,7 @@ const UpdateNotification = () => {
 
   const handleClose = useCallback(() => {
     setIsVisible(false);
+    // Ensure we clear the timer if it's closed manually
     if (hideTimerRef.current) {
         clearTimeout(hideTimerRef.current);
     }
@@ -19,12 +20,14 @@ const UpdateNotification = () => {
   useEffect(() => {
     const showTimer = setTimeout(() => {
       setIsVisible(true);
-    }, 1500);
+    }, 1500); // Delay before the box appears
 
+    // Set the timer to auto-close the notification after 20 seconds
     hideTimerRef.current = setTimeout(() => {
       handleClose();
-    }, 16500); // 1500ms delay + 15000ms duration
+    }, 21500); // 1.5s display delay + 20s visibility
 
+    // Cleanup timers on component unmount
     return () => {
       clearTimeout(showTimer);
       if (hideTimerRef.current) {
@@ -36,10 +39,7 @@ const UpdateNotification = () => {
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
-    // When modal is opened, clear the auto-hide timer
-    if (hideTimerRef.current) {
-      clearTimeout(hideTimerRef.current);
-    }
+    // The timer is no longer cleared here, ensuring the box will always auto-close.
   };
 
   if (!isVisible) {
